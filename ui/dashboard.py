@@ -68,7 +68,7 @@ def render_sidebar() -> bool:
     """Returns True when the backend is reachable."""
     st.sidebar.header("Data")
     label = st.sidebar.selectbox("Dataset", list(DATASETS))
-    if st.sidebar.button("Run pipeline", type="primary", use_container_width=True):
+    if st.sidebar.button("Run pipeline", type="primary", width="stretch"):
         body, err = api_post("/pipeline/run", {"raw_dir": DATASETS[label]})
         if err:
             st.sidebar.error(err)
@@ -76,6 +76,15 @@ def render_sidebar() -> bool:
             st.session_state["run"] = body
             st.sidebar.success(f"Pipeline run: {body['initiative_count']} initiatives, "
                                f"{body['change_count']} corrections logged")
+
+    if st.sidebar.button("Index charters", width="stretch",
+                         help="Parse, chunk and index the charters of the dataset the pipeline ran on"):
+        body, err = api_post("/charters/index")
+        if err:
+            st.sidebar.error(err)
+        else:
+            st.sidebar.success(f"Indexed {body['chunks']} chunks from {body['files']} charters "
+                               f"({body['retrieval']}); injection-flagged: {len(body['injection_flagged'])}")
 
     st.sidebar.header("Backend status")
     check_aws = st.sidebar.checkbox("Check AWS credentials", value=False,
@@ -129,7 +138,7 @@ def render_scorecard(sc: dict) -> None:
     df = scorecard_frame(sc["rows"])
     styled = df.style.map(lambda v: f"background-color: {STATUS_COLOURS.get(v, '')}; color: white"
                           if v in STATUS_COLOURS else "", subset=["Status"])
-    st.dataframe(styled, hide_index=True, use_container_width=True)
+    st.dataframe(styled, hide_index=True, width="stretch")
     with st.expander("How each number was computed (formula, inputs, source rows)"):
         pick = st.selectbox("Initiative", [f"{r['initiative_id']} {r['name']}" for r in sc["rows"]])
         row = next(r for r in sc["rows"] if pick.startswith(r["initiative_id"]))
@@ -138,7 +147,7 @@ def render_scorecard(sc: dict) -> None:
             "Metric": label, "Value": row["metrics"][key]["display"], "Formula": row["metrics"][key]["formula"],
             "Inputs": ", ".join(f"{k}={v}" for k, v in row["metrics"][key]["inputs"].items()),
             "Sources": "; ".join(row["metrics"][key]["source_refs"]), "Note": row["metrics"][key]["note"] or "",
-        } for key, label in METRIC_COLUMNS]), hide_index=True, use_container_width=True)
+        } for key, label in METRIC_COLUMNS]), hide_index=True, width="stretch")
 
 
 def render_charts(sc: dict) -> None:
@@ -155,14 +164,14 @@ def render_charts(sc: dict) -> None:
             x=alt.X("Adoption:Q", axis=alt.Axis(format="%")), y=alt.Y("Initiative:N", sort=None), color=colour,
             tooltip=["Initiative", "Adoption label", "Status"])
         rules = alt.Chart(pd.DataFrame({"t": [0.30, 0.60]})).mark_rule(strokeDash=[4, 4], color="black").encode(x="t:Q")
-        st.altair_chart(bars + rules, use_container_width=True)
+        st.altair_chart(bars + rules, width="stretch")
     with right:
         st.markdown("**ROI by initiative** (bars around zero)")
         roi = alt.Chart(data.dropna(subset=["ROI"])).mark_bar().encode(
             x=alt.X("ROI:Q", axis=alt.Axis(format="%")), y=alt.Y("Initiative:N", sort=None), color=colour,
             tooltip=["Initiative", "ROI label", "Status"])
         zero = alt.Chart(pd.DataFrame({"t": [0.0]})).mark_rule(color="black").encode(x="t:Q")
-        st.altair_chart(roi + zero, use_container_width=True)
+        st.altair_chart(roi + zero, width="stretch")
 
 
 def render_data_quality() -> None:
@@ -172,12 +181,64 @@ def render_data_quality() -> None:
         st.error(err)
         return
     st.caption(f"{len(dq['entries'])} corrections and standardisations applied before scoring.")
-    st.dataframe(pd.DataFrame(dq["rules"]), hide_index=True, use_container_width=True)
+    st.dataframe(pd.DataFrame(dq["rules"]), hide_index=True, width="stretch")
     entries = pd.DataFrame(dq["entries"])
     rule = st.selectbox("Filter by rule", ["All"] + [r["rule_id"] for r in dq["rules"]])
     if rule != "All":
         entries = entries[entries["rule_id"] == rule]
-    st.dataframe(entries, hide_index=True, use_container_width=True)
+    st.dataframe(entries, hide_index=True, width="stretch")
+
+
+EXAMPLES = ["What is the adoption of the Contract Review Assistant?", "What are the risks of the Customer Service Chatbot?",
+            "Why is INIT-004 Red?", "Which initiative has the highest ROI?", "What are the risks of INIT-003?"]
+ROUTE_BADGES = {"metric": "📊 metric (scorecard)", "narrative": "📄 narrative (charters)", "mixed": "📊+📄 mixed",
+                "unsupported": "⛔ no evidence", "refused": "🛡️ refused"}
+
+
+def render_answer(item: dict) -> None:
+    r = item["response"]
+    with st.chat_message("user"):
+        st.write(item["question"])
+    with st.chat_message("assistant"):
+        st.write(r["answer"])
+        st.caption(f"Route: {ROUTE_BADGES.get(r['route'], r['route'])} · status: {r['status']} · "
+                   f"data version {r['data_version']}")
+        if r["scorecard_sources"]:
+            with st.expander(f"Scorecard sources ({len(r['scorecard_sources'])})"):
+                st.dataframe(pd.DataFrame([{"Initiative": m["initiative_id"], "Metric": m["metric"],
+                                            "Value": m["display"], "Formula": m["formula"],
+                                            "Source rows": "; ".join(m["source_refs"])}
+                                           for m in r["scorecard_sources"]]), hide_index=True, width="stretch")
+        if r["charter_sources"]:
+            with st.expander(f"Charter sources ({len(r['charter_sources'])})"):
+                for c in r["charter_sources"]:
+                    page = f", page {c['page']}" if c.get("page") else ""
+                    flag = " ⚠️ contained instruction-like text (ignored)" if c["injection_flag"] else ""
+                    st.markdown(f"**{c['source_file']}** · {c['section']}{page}{flag}")
+                    st.text(c["text"])
+        if r["guard_notes"]:
+            with st.expander("Routing and guardrail notes"):
+                for n in r["guard_notes"]:
+                    st.write(f"- {n}")
+
+
+def render_chat(sc: dict) -> None:
+    st.subheader("5. Ask the assistant")
+    st.caption(f"Answers use the same scorecard shown above (data version {sc['data_version']}) and the "
+               "initiative charters. Numbers come only from the scorecard.")
+    history = st.session_state.setdefault("chat", [])
+    with st.form("ask", clear_on_submit=True):
+        question = st.text_input("Your question", placeholder=EXAMPLES[0])
+        submitted = st.form_submit_button("Ask")
+    st.caption("Try: " + " · ".join(EXAMPLES))
+    if submitted and question.strip():
+        body, err = api_post("/ask", {"question": question})
+        if err:
+            st.error(err)
+        else:
+            history.insert(0, {"question": question, "response": body})
+    for item in history:
+        render_answer(item)
 
 
 def main() -> None:
@@ -197,6 +258,7 @@ def main() -> None:
     render_scorecard(sc)
     render_charts(sc)
     render_data_quality()
+    render_chat(sc)
 
 
 main()

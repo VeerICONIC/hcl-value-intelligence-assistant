@@ -54,3 +54,19 @@ def test_dashboard_shows_scorecard_after_run(backend):
     values = {m.label: m.value for m in at.metric}
     assert values["Initiatives"] == "8" and values["🔴 Red"] == "3" and values["🟢 Green"] == "2"
     assert any(s.value.startswith("4. Data quality") for s in at.subheader)
+
+
+def test_dashboard_chat_answers_from_scorecard(backend, monkeypatch):
+    monkeypatch.setenv("LLM_MODE", "extractive")
+    assert backend.post("/pipeline/run").status_code == 200
+
+    def fake_post(url, json=None, timeout=None):
+        return backend.post(url.split("8000", 1)[-1], json=json)
+
+    monkeypatch.setattr(httpx, "post", fake_post)
+    at = AppTest.from_file(DASHBOARD, default_timeout=30).run()
+    at.text_input[0].input("Which initiatives are Red?")
+    next(b for b in at.button if b.label == "Ask").click().run()
+    assert not at.exception
+    assert len(at.chat_message) == 2
+    assert any("INIT-004" in m.value for m in at.chat_message[1].markdown)

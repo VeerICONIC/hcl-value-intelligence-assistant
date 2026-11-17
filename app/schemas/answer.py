@@ -38,3 +38,19 @@ class AnswerResponse(BaseModel):
     charter_sources: list[CharterChunk]
     guard_report: dict
     trace: list[dict]
+
+
+class AskResponse(BaseModel):
+    """POST /ask response (Step 7 sprint shape, requested by the developer).
+
+    ``status``: answered | no_evidence (exact fallback message) | refused (input guard).
+    ``guard_notes`` explain routing and every guard that fired, for the dashboard and evaluation.
+    """
+
+    route: str
+    status: Literal["answered", "no_evidence", "refused"]
+    answer: str
+    scorecard_sources: list[MetricValue]
+    charter_sources: list[CharterChunk]
+    guard_notes: list[str]
+    data_version: str
