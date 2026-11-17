@@ -62,3 +62,18 @@ def ask(body: AskRequest, request: Request) -> AskResponse:
     result = require_result(request)        # 409 until the pipeline has run: chat uses that scorecard
     index, _ = get_index(request)
     return answer_question(body.question, result.scorecard, result.data_version, index, get_settings())
+
+
+@router.post("/report/weekly")
+def weekly_report(request: Request) -> dict:
+    """Deterministic Markdown weekly report from the current scorecard + charter Risks sections (no LLM)."""
+    from app.generation.report_writer import build_weekly_report
+
+    result = require_result(request)
+    index, _ = get_index(request)
+    markdown = build_weekly_report(result, index)
+    out = resolve_project_path(get_settings().processed_dir)
+    out.mkdir(parents=True, exist_ok=True)
+    (out / "weekly_report.md").write_text(markdown, encoding="utf-8")
+    return {"data_version": result.data_version, "filename": f"weekly_report_{result.as_of.isoformat()}.md",
+            "markdown": markdown}

@@ -76,8 +76,19 @@ def chunk_charter(path: Path) -> list[CharterChunk]:
     for section, body in sections:
         if not body:
             continue
-        # PDF lines are split mid-sentence; join paragraph fragments into one text
-        text = "\n".join(b.text for b in body).strip()
+        # PDF lines are split mid-sentence: glue a fragment onto the previous line unless that line
+        # ended a sentence or the fragment starts a new list item.
+        lines: list[str] = []
+        for b in body:
+            for line in b.text.splitlines():
+                line = line.strip()
+                if not line:
+                    continue
+                if lines and not lines[-1].endswith((".", "!", "?", ":")) and not line.startswith(("-", "*", "•")):
+                    lines[-1] = f"{lines[-1]} {line}"
+                else:
+                    lines.append(line)
+        text = "\n".join(lines).strip()
         pages = [b.page for b in body if b.page and b.page > 0]
         slug = re.sub(r"[^a-z0-9]+", "-", section.lower()).strip("-")
         chunks.append(CharterChunk(

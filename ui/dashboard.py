@@ -241,6 +241,22 @@ def render_chat(sc: dict) -> None:
         render_answer(item)
 
 
+def render_report() -> None:
+    st.subheader("6. Weekly executive report")
+    st.caption("Generated deterministically from the scorecard and charter Risks sections; no language model.")
+    if st.button("Generate report"):
+        body, err = api_post("/report/weekly")
+        if err:
+            st.error(err)
+        else:
+            st.session_state["report"] = body
+    report = st.session_state.get("report")
+    if report:
+        st.download_button("Download Markdown", report["markdown"], file_name=report["filename"], mime="text/markdown")
+        with st.container(border=True):
+            st.markdown(report["markdown"])
+
+
 def main() -> None:
     st.set_page_config(page_title="Nimbus Value Intelligence", layout="wide")
     st.title("Nimbus Value Intelligence Assistant")
@@ -259,6 +275,7 @@ def main() -> None:
     render_charts(sc)
     render_data_quality()
     render_chat(sc)
+    render_report()
 
 
 main()

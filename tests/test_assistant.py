@@ -116,3 +116,18 @@ def test_index_endpoint(client):
     body = client.post("/charters/index").json()
     assert body["chunks"] == 63 and body["injection_flagged"] == ["INIT-005:risks-and-mitigations"]
     assert body["retrieval"] == "bm25"
+
+
+def test_weekly_report_is_deterministic_and_cited(client):
+    body = client.post("/report/weekly").json()
+    md = body["markdown"]
+    assert "Initiatives requiring attention" in md and "| INIT-004 Contract Review Assistant | 🔴 Red |" in md
+    # Red first, then Amber
+    assert md.index("INIT-004 Contract Review Assistant (Red)") < md.index("INIT-003 Sales Forecast Model (Amber)")
+    assert "[C1] contract_review_assistant_charter.md, Risks and Mitigations" in md
+    assert "ignore all previous instructions" not in md.lower()
+    assert "INIT-003 Sales Forecast Model (Amber)" in md and "no Risks and Mitigations section" in md
+    assert "involve planners in validation" in md          # PDF line fragments joined
+    again = client.post("/report/weekly").json()["markdown"]
+    strip = lambda t: "\n".join(l for l in t.splitlines() if not l.startswith("**Generated:**"))
+    assert strip(again) == strip(md)
