@@ -69,6 +69,9 @@ class Settings(BaseSettings):
     )
     llm_max_tokens: int = Field(800, ge=64, le=4096, description="Max tokens Nova may generate per call.")
     llm_temperature: float = Field(0.0, ge=0.0, le=1.0, description="0 = most deterministic.")
+    llm_mode: str = Field(
+        "bedrock", description="bedrock = Titan retrieval + Nova answers; extractive = offline BM25 retrieval and "
+                               "answers built from cited excerpts (no AWS calls).")
     embedding_batch_size: int = Field(
         8, ge=1, le=64, description="Concurrent Titan requests per batch (Titan has no batch API)."
     )
@@ -103,6 +106,14 @@ class Settings(BaseSettings):
         v = v.strip()
         if not v:
             raise ValueError("must not be blank")
+        return v
+
+    @field_validator("llm_mode")
+    @classmethod
+    def _valid_llm_mode(cls, v: str) -> str:
+        v = v.strip().lower()
+        if v not in {"bedrock", "extractive"}:
+            raise ValueError("must be 'bedrock' or 'extractive'")
         return v
 
     @field_validator("log_level")

@@ -27,6 +27,7 @@ def health(check_aws: bool = Query(False, description="Also check that AWS crede
         "embed_model": s.bedrock_embed_model_id,
         "llm_model": s.bedrock_llm_model_id,
         "chroma_collection": s.chroma_collection,
+        "llm_mode": s.llm_mode,
     }
     if check_aws:
         body["aws_credentials"] = bedrock.aws_credentials_available(s)
