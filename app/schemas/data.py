@@ -12,7 +12,7 @@ class ChangeLogEntry(BaseModel):
     e.g. "ROI for INIT-004 changes from 1.8 to 0.42".
     """
 
-    rule_id: str                  # e.g. "DQ-05"
+    rule_id: str                  # generic rule name, e.g. "UNIT_SCALE" (catalogue: app/data/changelog.py RULES)
     file: str                     # raw file the value came from
     row: int | None               # row in the raw file, if the change is row-level
     column: str | None

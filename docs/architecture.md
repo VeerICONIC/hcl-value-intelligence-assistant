@@ -95,7 +95,7 @@ Rules: sections 1–4 never call the LLM. The chat is disabled until the pipelin
 | Metric | Formula | Edge cases |
 |---|---|---|
 | Adoption | latest-week WAU / licensed users | licensed users 0 or missing -> `None` + reason |
-| WAU change | (latest-week WAU - first-week WAU) / first-week WAU over the 3-week period | first-week WAU 0 -> `None`; a missing week -> flagged, assumption logged |
+| WAU change | (latest-week WAU - first-week WAU) / first-week WAU over the 3-week period | first-week WAU 0 -> `None`; a missing or excluded first/latest week -> `None` + reason; a missing middle week -> flagged only (A4) |
 | ROI | (realised benefit to date - total cost to date) / total cost to date | cost 0 -> `None` |
 | Average monthly benefit | realised benefit to date / months live | months live per assumption A1 |
 | Payback (months) | total cost to date / average monthly benefit | benefit 0 -> `None` ("not reached") |
@@ -165,13 +165,13 @@ Module interfaces: `query_scorecard(q) -> list[MetricValue]`, `search_charters(q
 
 ```
 hcl-value-intelligence-assistant/
-  config/        metric_dictionary.yaml  initiatives.yaml  status_rules.yaml  guardrails.yaml
+  config/        metric_dictionary.yaml  initiatives.yaml  status_rules.yaml  guardrails.yaml (Step 6)
   data/          raw/  charters/  processed/  answer_key/
   app/
-    main.py      core/ (config, logging, exceptions, bedrock)
-    api/routes/  pipeline.py  scorecard.py  data_quality.py  ask.py  report.py  health.py
-    schemas/     data.py  scorecard.py  retrieval.py  answer.py
-    data/        loader.py  cleaning.py  normalize.py  changelog.py
+    main.py      core/ (config, logging, exceptions, bedrock, yaml_config)
+    api/routes/  pipeline.py  scorecard.py  data_quality.py  usage.py  ask.py  report.py  health.py
+    schemas/     data.py  scorecard.py  retrieval.py  answer.py  pipeline.py (API bodies)
+    data/        loader.py  cleaning.py  normalize.py  changelog.py  pipeline.py (run_pipeline)
     scorecard/   metrics.py  status.py  engine.py  query.py
     charters/    parsers/  chunker.py  injection.py  embeddings.py  store.py  retriever.py
     orchestration/ answer.py  router.py  guards.py  render.py  fallback.py
@@ -306,5 +306,5 @@ Analytics first, then the assistant. Each step ends with passing tests and an en
 - **A1 Months live:** measured from go-live date to the report as-of date (last usage week end), in fractional months (days / 30.44). Clarification question: should partial months count?
 - **A2 Undefined aggregates:** portfolio-level averages or totals are not defined metrics, so they are not computed.
 - **A3 Charter figures:** numbers inside charters are not displayed by the assistant (FR-08); charter excerpts are shown as source evidence only.
-- **A4 Missing week:** WAU change uses the first and latest available weeks; flagged in the change log.
+- **A4 Weeks used:** "first week" and "latest week" are the portfolio's first and latest supplied weeks (the same for every initiative). A missing middle week is only flagged. A missing or excluded (e.g. WAU above licensed users) first or latest week makes the affected metrics `None` with the reason; no other week is substituted.
 - **A5 Currency:** all money is USD; `USD '000` means thousands. No currency conversion is needed for the supplied data (configurable if the real data differs).

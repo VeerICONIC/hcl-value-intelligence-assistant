@@ -344,8 +344,9 @@ def random_issues_usage(df: pd.DataFrame) -> pd.DataFrame:
                     df.at[r, "value"] = f"{int(df.at[r, 'value']):,}"
                     issue(f"R-TEXT-{iid}", "weekly_usage.csv", f"{iid} one WAU value stored as text with a comma", "Cast to integer", ["adoption", "wau_change"])
             elif kind == "dup":
-                dups.append(RNG.choice(rows))
-                issue(f"R-DUP-{iid}", "weekly_usage.csv", f"{iid} one row duplicated", "Drop exact duplicates", [])
+                # Remember (iid, row, position in ISSUES). The issue is logged at the end, and only if
+                # the row still exists: a later R-MISS for the same initiative may delete it.
+                dups.append((iid, RNG.choice(rows), len(ISSUES)))
             elif kind == "bad" and mid:
                 touched.add(mid[0])
                 df.at[mid[0], "value"] = lic * RNG.randrange(2, 6)
@@ -354,8 +355,14 @@ def random_issues_usage(df: pd.DataFrame) -> pd.DataFrame:
                 df = df.drop(index=mid[0])
                 rows = [r for r in rows if r != mid[0]]
                 issue(f"R-MISS-{iid}", "weekly_usage.csv", f"{iid} week-2 row missing", "Flag; metrics use first and latest weeks", [])
-    if dups:
-        df = pd.concat([df, df.loc[[d for d in dups if d in df.index]]])
+    kept = [(iid, r, pos) for iid, r, pos in dups if r in df.index]
+    # Insert each R-DUP issue where it was drawn (back to front so earlier positions stay valid),
+    # keeping planted_issues.json in the same order as before this fix.
+    for iid, _, pos in sorted(kept, key=lambda k: k[2], reverse=True):
+        ISSUES.insert(pos, {"id": f"R-DUP-{iid}", "file": "weekly_usage.csv", "description": f"{iid} one row duplicated",
+                            "expected_correction": "Drop exact duplicates", "affects_metrics": []})
+    if kept:
+        df = pd.concat([df, df.loc[[r for _, r, _ in kept]]])
     return df
 
 

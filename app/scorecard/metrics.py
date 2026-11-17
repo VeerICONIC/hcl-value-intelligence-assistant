@@ -54,7 +54,11 @@ class Sourced:
 
 # --- display formatting (the only place numbers become text) -----------------------
 def fmt_pct(v: float, signed: bool = False) -> str:
-    return f"{v * 100:+.1f}%" if signed else f"{v * 100:.1f}%"
+    """0.72 -> '72.0%'; signed: 0.125 -> '+12.5%', -0.25 -> '-25.0%', 0 -> '0.0%' (no sign on zero)."""
+    text = f"{v * 100:.1f}%"
+    if signed and not text.startswith("-") and text != "0.0%":
+        text = "+" + text
+    return text
 
 
 def fmt_money(v: float) -> str:
