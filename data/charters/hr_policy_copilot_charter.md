@@ -39,6 +39,6 @@ Benefits come from HR time saved on repetitive questions and faster resolution o
 
 ## Timeline
 
-- Phase 1: Pilot with two departments
-- Phase 2: Group-wide rollout
-- Phase 3: Quarterly content and accuracy review
+- First phase: Pilot with two departments
+- Second phase: Group-wide rollout
+- Third phase: Quarterly content and accuracy review

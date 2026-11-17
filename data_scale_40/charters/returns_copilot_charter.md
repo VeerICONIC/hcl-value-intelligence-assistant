@@ -36,6 +36,6 @@ Benefits are tracked by the Returns operations lead and reported to the AI portf
 
 ## Timeline
 
-- Phase 1: Pilot
-- Phase 2: Rollout
-- Phase 3: Optimisation
+- First phase: Pilot
+- Second phase: Rollout
+- Third phase: Optimisation

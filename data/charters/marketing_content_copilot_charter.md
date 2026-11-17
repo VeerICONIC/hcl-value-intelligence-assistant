@@ -39,6 +39,6 @@ Benefits are agency copywriting spend avoided and marketer time saved. The Marke
 
 ## Timeline
 
-- Phase 1: Pilot with brand team
-- Phase 2: Rollout to regional marketing
-- Phase 3: Localisation workflows
+- First phase: Pilot with brand team
+- Second phase: Rollout to regional marketing
+- Third phase: Localisation workflows

@@ -23,6 +23,7 @@ METRIC_WORDS = {
 }
 STATUS_WORDS = {"green": "Green", "amber": "Amber", "red": "Red"}
 STATUS_TRIGGERS = ("status", "rag", "attention", "performing", "on track")
+ATTENTION_WORDS = ("attention", "at risk", "concern", "concerns", "struggling", "underperforming", "off track")
 RANK_DESC = ("highest", "best", "top", "most", "largest", "biggest", "leading")
 RANK_ASC = ("lowest", "worst", "least", "smallest", "bottom", "weakest")
 COUNT_WORDS = ("how many", "number of", "count")
@@ -121,6 +122,9 @@ def route(question: str, initiatives: dict[str, str]) -> RouteResult:
             r.operation = "lookup"
         elif statuses:
             r.operation = "filter"
+        elif any(_has(q, w) for w in ATTENTION_WORDS):
+            r.operation = "filter"            # "needs attention" = not Green
+            statuses = ["Red", "Amber", "Insufficient data"]
         else:
             if r.kind == "metric":
                 return RouteResult("unsupported", iids, reason="metric question without an initiative or a ranking")

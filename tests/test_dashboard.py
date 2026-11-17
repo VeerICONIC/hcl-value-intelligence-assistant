@@ -70,3 +70,23 @@ def test_dashboard_chat_answers_from_scorecard(backend, monkeypatch):
     assert not at.exception
     assert len(at.chat_message) == 2
     assert any("INIT-004" in m.value for m in at.chat_message[1].markdown)
+
+
+def test_dashboard_example_button_attention_panel_and_report(backend, monkeypatch):
+    monkeypatch.setenv("LLM_MODE", "extractive")
+    assert backend.post("/pipeline/run").status_code == 200
+
+    def fake_post(url, json=None, timeout=None):
+        return backend.post(url.split("8000", 1)[-1], json=json)
+
+    monkeypatch.setattr(httpx, "post", fake_post)
+    at = AppTest.from_file(DASHBOARD, default_timeout=30).run()
+    page = " ".join(m.value for m in at.markdown)
+    assert "Needs attention" in page and "INIT-004" in page          # attention cards rendered
+    next(b for b in at.button if b.label == "Which initiatives need attention?").click().run()
+    assert not at.exception
+    assert any("INIT-004" in m.value for m in at.chat_message[1].markdown)
+    next(b for b in at.button if b.label == "Generate report").click().run()
+    assert not at.exception
+    report = " ".join(m.value for m in at.markdown)
+    assert "Initiatives requiring attention" in report and "\$25,019" in report   # '$' escaped for Streamlit

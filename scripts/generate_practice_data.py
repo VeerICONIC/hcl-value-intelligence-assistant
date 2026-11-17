@@ -344,9 +344,7 @@ def random_issues_usage(df: pd.DataFrame) -> pd.DataFrame:
                     df.at[r, "value"] = f"{int(df.at[r, 'value']):,}"
                     issue(f"R-TEXT-{iid}", "weekly_usage.csv", f"{iid} one WAU value stored as text with a comma", "Cast to integer", ["adoption", "wau_change"])
             elif kind == "dup":
-                # Remember (iid, row, position in ISSUES). The issue is logged at the end, and only if
-                # the row still exists: a later R-MISS for the same initiative may delete it.
-                dups.append((iid, RNG.choice(rows), len(ISSUES)))
+                dups.append((iid, RNG.choice(rows)))   # logged below, only if the row still exists
             elif kind == "bad" and mid:
                 touched.add(mid[0])
                 df.at[mid[0], "value"] = lic * RNG.randrange(2, 6)
@@ -355,14 +353,11 @@ def random_issues_usage(df: pd.DataFrame) -> pd.DataFrame:
                 df = df.drop(index=mid[0])
                 rows = [r for r in rows if r != mid[0]]
                 issue(f"R-MISS-{iid}", "weekly_usage.csv", f"{iid} week-2 row missing", "Flag; metrics use first and latest weeks", [])
-    kept = [(iid, r, pos) for iid, r, pos in dups if r in df.index]
-    # Insert each R-DUP issue where it was drawn (back to front so earlier positions stay valid),
-    # keeping planted_issues.json in the same order as before this fix.
-    for iid, _, pos in sorted(kept, key=lambda k: k[2], reverse=True):
-        ISSUES.insert(pos, {"id": f"R-DUP-{iid}", "file": "weekly_usage.csv", "description": f"{iid} one row duplicated",
-                            "expected_correction": "Drop exact duplicates", "affects_metrics": []})
+    kept = [(iid, r) for iid, r in dups if r in df.index]   # a later R-MISS may have deleted the row
+    for iid, _ in kept:
+        issue(f"R-DUP-{iid}", "weekly_usage.csv", f"{iid} one row duplicated", "Drop exact duplicates", [])
     if kept:
-        df = pd.concat([df, df.loc[[r for _, r, _ in kept]]])
+        df = pd.concat([df, df.loc[[r for _, r in kept]]])
     return df
 
 
@@ -418,7 +413,7 @@ def extra_charter(iid: str) -> None:
         secs.append(("Risks and Mitigations", [f"- Risk: Low adoption by {domain.lower()} staff. Mitigation: Training and workflow integration.",
                                                "- Risk: Data quality issues in source systems. Mitigation: Data owner reviews before each release."]))
     secs += [("Stakeholders", [f"- Executive sponsor: Head of {domain}", f"- Product owner: {domain} Operations Lead"]),
-             ("Timeline", ["- Phase 1: Pilot", "- Phase 2: Rollout", "- Phase 3: Optimisation"])]
+             ("Timeline", ["- First phase: Pilot", "- Second phase: Rollout", "- Third phase: Optimisation"])]
     body = [f"# Initiative Charter: {name} ({iid})", ""]
     for h, lines in secs:
         body += [f"## {h}", "", *lines, ""]
@@ -525,7 +520,7 @@ def charter_sections(iid: str) -> tuple[str, list[tuple[str, list[str]]]]:
         secs.append(("Risks and Mitigations", [f"- Risk: {r} Mitigation: {m}" for r, m in c["risks"]]))
     secs += [
         ("Stakeholders", [f"- {role}: {who}" for role, who in c["stakeholders"]]),
-        ("Timeline", [f"- Phase {n}: {t}" for n, t in enumerate(c["timeline"], 1)]),
+        ("Timeline", [f"- {o} phase: {t}" for o, t in zip(["First", "Second", "Third", "Fourth"], c["timeline"])]),
     ]
     return title, secs
 

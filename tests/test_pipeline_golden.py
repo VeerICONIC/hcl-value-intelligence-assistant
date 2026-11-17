@@ -91,23 +91,9 @@ def _initiatives_for(issue: dict) -> set[str]:
     return set(re.findall(r"INIT-\d{3}", issue["description"]))
 
 
-# Answer-key defects: issues listed in planted_issues.json that are NOT present in the raw files.
-# R-DUP-INIT-029: the generator queued a duplicate of INIT-029's week-2 row, then the R-MISS issue
-# deleted that row, so the duplicate was never written (generate_practice_data.py lines 346-358).
-# test_known_answer_key_defects_are_still_defects keeps this list honest.
-KNOWN_ANSWER_KEY_DEFECTS = {"data_scale_40": {"R-DUP-INIT-029"}}
-
-
-def test_known_answer_key_defects_are_still_defects():
-    usage = pd.read_csv(REPO / "data_scale_40" / "raw" / "weekly_usage.csv", dtype=str, keep_default_na=False)
-    rows = usage[usage["initiative_id"].str.contains(r"(?i)init\W*0*29\b", regex=True)]
-    assert not rows.duplicated().any(), "INIT-029 now has a duplicate row: remove it from KNOWN_ANSWER_KEY_DEFECTS"
-
-
 def test_every_planted_issue_is_in_the_change_log(run):
     name, folder, result, _ = run
     issues = json.loads((folder / "answer_key" / "planted_issues.json").read_text(encoding="utf-8"))
-    issues = [i for i in issues if i["id"] not in KNOWN_ANSWER_KEY_DEFECTS.get(name, set())]
     missing = []
     for issue in issues:
         rule = _rule_for(issue["id"])

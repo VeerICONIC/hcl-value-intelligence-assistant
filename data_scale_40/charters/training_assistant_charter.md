@@ -36,6 +36,6 @@ Benefits are tracked by the Training operations lead and reported to the AI port
 
 ## Timeline
 
-- Phase 1: Pilot
-- Phase 2: Rollout
-- Phase 3: Optimisation
+- First phase: Pilot
+- Second phase: Rollout
+- Third phase: Optimisation

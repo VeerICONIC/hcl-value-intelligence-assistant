@@ -34,3 +34,7 @@ __pycache__/
 Thumbs.db
 .vscode/
 .idea/
+
+# --- Local artefacts (not source) ---------------------------------------
+nimbus_full_project_v2.zip
+data/embedding_cache.json

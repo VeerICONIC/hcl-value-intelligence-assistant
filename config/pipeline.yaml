@@ -1,0 +1,67 @@
+# Data pipeline configuration (D10: real files should need YAML edits, not code edits).
+
+files:
+  initiatives: initiatives.csv
+  usage: weekly_usage.csv
+  financials: financials.xlsx
+
+# Raw column name -> canonical column name (add aliases here when real files use other headers)
+column_aliases:
+  initiatives:
+    initiative_id: [initiative_id, id, initiative, project_id]
+    name: [name, initiative_name, title]
+    type: [type, initiative_type, category]
+    business_unit: [business_unit, bu, department]
+    go_live_date: [go_live_date, go_live, live_date, launch_date]
+    licensed_users: [licensed_users, licences, licenses, seats]
+    planned_annual_benefit: [planned_annual_benefit, annual_benefit_plan, planned_benefit]
+    currency: [currency]
+  usage:
+    initiative_id: [initiative_id, id, initiative]
+    week_start: [week_start, week, week_commencing]
+    metric_name: [metric_name, metric, measure]
+    value: [value, count, users]
+  financials:
+    initiative_id: [initiative_id, id, initiative]
+    report_date: [report_date, date, period_end]
+    measure: [measure, metric, item]
+    value: [value, amount]
+    unit: [unit, units, currency]
+    basis: [basis, type]
+
+id_pattern: "INIT-{:03d}"
+
+# Metric / measure names (case-insensitive) -> canonical
+metric_aliases:
+  weekly_active_users: [weekly_active_users, wau, "active users (weekly)", weekly active users, active_users_weekly]
+measure_aliases:
+  benefit_to_date: [benefit_to_date, benefit to date, realised_benefit, realized_benefit, value_delivered]
+  cost_to_date: [cost_to_date, cost to date, total_cost, spend]
+  monthly_cost: [monthly_cost]
+  reported_roi_pct: [reported_roi_pct, roi, roi_pct, roi_percent]   # check only, never used for the scorecard
+
+# Unit -> multiplier to the base currency (USD)
+units:
+  "USD": 1
+  "USD '000": 1000
+  "%": 1
+
+days_per_month: 30.44
+as_of: auto            # auto = latest usage week start + 6 days, or a fixed date like 2026-11-15
+
+status_rules:
+  green_min_adoption: 0.60
+  red_below_adoption: 0.30
+  # Red is checked first: adoption < 30% or ROI < 0 -> Red; adoption >= 60% and ROI > 0 -> Green; else Amber
+
+canonical_names:       # optional: canonical display names by initiative id
+  INIT-001: HR Policy Copilot
+  INIT-002: IT Helpdesk Bot
+  INIT-003: Sales Forecast Model
+  INIT-004: Contract Review Assistant
+  INIT-005: Customer Service Chatbot
+  INIT-006: Invoice Anomaly Detector
+  INIT-007: Marketing Content Copilot
+  INIT-008: Demand Planning Model
+
+acronyms: [IT, HR, AI]

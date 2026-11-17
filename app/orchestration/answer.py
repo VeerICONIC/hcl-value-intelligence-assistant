@@ -50,8 +50,16 @@ def metric_answer(r: RouteResult, rows: dict[str, ScorecardRow], data_version: s
         return " ".join(parts) + f" {cite}", sources
 
     if r.operation == "filter":
-        chosen = [row for row in rows.values() if row.status in r.status_filter]
+        order = {"Red": 0, "Amber": 1, "Insufficient data": 2, "Green": 3}
+        chosen = sorted((row for row in rows.values() if row.status in r.status_filter),
+                        key=lambda row: (order[row.status], row.initiative_id))
         sources = [row.metrics["adoption"] for row in chosen] + [row.metrics["roi"] for row in chosen]
+        if set(r.status_filter) == {"Red", "Amber", "Insufficient data"}:
+            if not chosen:
+                return f"No initiative needs attention: all are Green. {cite}", sources
+            listed = "; ".join(f"{_label(row)} ({row.status}: {row.status_reason.split(': ', 1)[-1]})"
+                               for row in chosen)
+            return f"Initiatives needing attention (Red first, then Amber): {listed}. {cite}", sources
         names = ", ".join(_label(row) for row in chosen) or "none"
         return f"{' or '.join(r.status_filter)} initiatives: {names}. {cite}", sources
 

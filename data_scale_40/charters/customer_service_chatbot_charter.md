@@ -40,6 +40,6 @@ Benefits are contact-centre agent costs avoided. Costs include platform licences
 
 ## Timeline
 
-- Phase 1: Launch on website
-- Phase 2: Mobile app launch
-- Phase 3: Integration with order management system
+- First phase: Launch on website
+- Second phase: Mobile app launch
+- Third phase: Integration with order management system

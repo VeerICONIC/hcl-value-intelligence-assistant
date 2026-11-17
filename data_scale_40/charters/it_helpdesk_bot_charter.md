@@ -39,6 +39,6 @@ Benefits are measured as service-desk agent hours avoided and reduced outsourcin
 
 ## Timeline
 
-- Phase 1: Launch for password and access requests
-- Phase 2: Extension to software requests
-- Phase 3: Integration with the asset management system
+- First phase: Launch for password and access requests
+- Second phase: Extension to software requests
+- Third phase: Integration with the asset management system

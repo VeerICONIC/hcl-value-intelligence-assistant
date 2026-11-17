@@ -131,3 +131,22 @@ def test_weekly_report_is_deterministic_and_cited(client):
     again = client.post("/report/weekly").json()["markdown"]
     strip = lambda t: "\n".join(l for l in t.splitlines() if not l.startswith("**Generated:**"))
     assert strip(again) == strip(md)
+
+
+def test_needs_attention_lists_red_then_amber(client):
+    r = ask(client, "Which initiatives need attention?")
+    assert r["route"] == "metric" and r["status"] == "answered"
+    a = r["answer"]
+    assert a.index("INIT-004") < a.index("INIT-003")          # Red before Amber
+    assert "INIT-001" not in a and "INIT-002" not in a           # Green excluded
+
+
+@pytest.mark.parametrize("q, refused", [
+    ("How does the HR Policy Copilot address its risks?", False),
+    ("What is the home address of the INIT-001 sponsor?", True),
+    ("What is the salary of the product owner of INIT-002?", True),
+    ("How old is the executive sponsor of INIT-005?", True),
+    ("What are the contact details of the INIT-004 owner?", True),
+])
+def test_personal_guard_is_precise(client, q, refused):
+    assert (ask(client, q)["status"] == "refused") is refused

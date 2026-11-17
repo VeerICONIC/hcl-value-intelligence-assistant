@@ -39,6 +39,6 @@ Benefits are external counsel fees avoided and faster contract cycle times. Real
 
 ## Timeline
 
-- Phase 1: Pilot with procurement contracts
-- Phase 2: Rollout to the full legal team
-- Phase 3: Expansion to customer contracts
+- First phase: Pilot with procurement contracts
+- Second phase: Rollout to the full legal team
+- Third phase: Expansion to customer contracts

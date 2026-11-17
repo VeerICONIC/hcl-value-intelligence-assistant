@@ -381,13 +381,6 @@
     ]
   },
   {
-    "id": "R-DUP-INIT-010",
-    "file": "weekly_usage.csv",
-    "description": "INIT-010 one row duplicated",
-    "expected_correction": "Drop exact duplicates",
-    "affects_metrics": []
-  },
-  {
     "id": "R-BAD-INIT-011",
     "file": "weekly_usage.csv",
     "description": "INIT-011 week-2 WAU above licensed users",
@@ -437,13 +430,6 @@
       "adoption",
       "wau_change"
     ]
-  },
-  {
-    "id": "R-DUP-INIT-014",
-    "file": "weekly_usage.csv",
-    "description": "INIT-014 one row duplicated",
-    "expected_correction": "Drop exact duplicates",
-    "affects_metrics": []
   },
   {
     "id": "R-NEG-INIT-015",
@@ -515,13 +501,6 @@
       "adoption",
       "wau_change"
     ]
-  },
-  {
-    "id": "R-DUP-INIT-022",
-    "file": "weekly_usage.csv",
-    "description": "INIT-022 one row duplicated",
-    "expected_correction": "Drop exact duplicates",
-    "affects_metrics": []
   },
   {
     "id": "R-ID-INIT-023",
@@ -604,13 +583,6 @@
     ]
   },
   {
-    "id": "R-DUP-INIT-029",
-    "file": "weekly_usage.csv",
-    "description": "INIT-029 one row duplicated",
-    "expected_correction": "Drop exact duplicates",
-    "affects_metrics": []
-  },
-  {
     "id": "R-MISS-INIT-029",
     "file": "weekly_usage.csv",
     "description": "INIT-029 week-2 row missing",
@@ -653,13 +625,6 @@
       "adoption",
       "wau_change"
     ]
-  },
-  {
-    "id": "R-DUP-INIT-032",
-    "file": "weekly_usage.csv",
-    "description": "INIT-032 one row duplicated",
-    "expected_correction": "Drop exact duplicates",
-    "affects_metrics": []
   },
   {
     "id": "R-TEXT-INIT-033",
@@ -721,6 +686,34 @@
       "adoption",
       "wau_change"
     ]
+  },
+  {
+    "id": "R-DUP-INIT-010",
+    "file": "weekly_usage.csv",
+    "description": "INIT-010 one row duplicated",
+    "expected_correction": "Drop exact duplicates",
+    "affects_metrics": []
+  },
+  {
+    "id": "R-DUP-INIT-014",
+    "file": "weekly_usage.csv",
+    "description": "INIT-014 one row duplicated",
+    "expected_correction": "Drop exact duplicates",
+    "affects_metrics": []
+  },
+  {
+    "id": "R-DUP-INIT-022",
+    "file": "weekly_usage.csv",
+    "description": "INIT-022 one row duplicated",
+    "expected_correction": "Drop exact duplicates",
+    "affects_metrics": []
+  },
+  {
+    "id": "R-DUP-INIT-032",
+    "file": "weekly_usage.csv",
+    "description": "INIT-032 one row duplicated",
+    "expected_correction": "Drop exact duplicates",
+    "affects_metrics": []
   },
   {
     "id": "R-DUP-INIT-039",

@@ -36,6 +36,6 @@ Benefits are tracked by the Order Management operations lead and reported to the
 
 ## Timeline
 
-- Phase 1: Pilot
-- Phase 2: Rollout
-- Phase 3: Optimisation
+- First phase: Pilot
+- Second phase: Rollout
+- Third phase: Optimisation
