@@ -8,13 +8,13 @@ Build order: architecture.md §10.
 | 1 Skeleton | ✅ Done (2026-11-17) |
 | 2 Practice data generator + answer key | ✅ Done (dataset supplied by the developer, 2026-11-17) |
 | 3 Data pipeline + scorecard + analytics API | ✅ Done (2026-11-17) |
-| 4 Dashboard v1 (no LLM) | ⏭ Next |
-| 5 Charter indexing + retrieval | |
-| 6 Router + query engine + guards + fallback | |
-| 7 Composer + number guard + `/ask` | |
-| 8 Dashboard v2 (Ask panel) | |
-| 9 Weekly report | |
-| 10 Evaluation + README + assumptions log | |
+| 4 Dashboard v1 (no LLM) | ✅ Done (sprint M1) |
+| 5 Charter indexing + retrieval | ✅ Done (sprint M2) |
+| 6 Router + query engine + guards + fallback | ✅ Done (sprint M2) |
+| 7 Composer + number guard + `/ask` | ✅ Done (sprint M2, simplified) |
+| 8 Dashboard v2 (Ask panel) | ✅ Done (sprint M2) |
+| 9 Weekly report | ✅ Done (sprint M3) |
+| 10 Evaluation + README + assumptions log | ✅ Done (sprint M4) |
 
 ---
 
@@ -148,3 +148,42 @@ Step 3 plan approved ("go").
 ### Next
 Step 4: Dashboard v1 (no LLM): sidebar with Run pipeline, overview tiles, scorecard table with drill-down, charts,
 data-quality log (plan first).
+
+---
+
+## 2026-11-17: Demo sprint (M0-M4), developer-approved change of plan
+
+The developer switched to sprint mode (under two hours to the demo): no "go" between steps, commit per milestone,
+keep it simple. The R-DUP-INIT-029 generator fix was skipped (known-defect note kept). Note: the generator code
+fix was already included in the Step 3 commit, but the data was NOT regenerated, so the guard test still holds.
+
+### Done
+- **M0 Bedrock:** `scripts/test_bedrock.py --all` -> FAIL, no AWS credentials signed in. `.env` sets
+  `LLM_MODE=extractive` (new setting, also on `/health`). Bedrock paths (Titan + Chroma, Nova Converse) are
+  implemented with automatic fallback, but were not exercised live.
+- **M1 Dashboard v1** (`ui/dashboard.py`): sidebar (dataset, Run pipeline, Index charters, backend status), tiles,
+  colour-coded scorecard + drill-down (formula, inputs, source rows), adoption chart with 30%/60% lines, ROI bars
+  around zero, change log with rule filter.
+- **M2 RAG + chat:** `app/charters/chunker.py` (md/pdf/docx -> one chunk per section, INIT id from title, PDF line
+  fragments joined), `injection.py` (flag + strip), `index.py` (BM25 + preferred-section lookup; Titan/Chroma in
+  bedrock mode). `app/orchestration/router.py` (rules), `guards.py` (personal data, number guard), `answer.py`
+  (templates for metric answers, extractive or Nova narrative, exact fallback). `app/generation/llm.py` (Nova).
+  Endpoints `POST /charters/index`, `POST /ask` (charters follow the pipeline's dataset). Chat section on the page.
+- **M3 Weekly report:** `app/generation/report_writer.py` + `POST /report/weekly` (deterministic Markdown, Red then
+  Amber with status reason and cited top charter risk; INIT-003 shows the fallback). Dashboard Generate + download.
+- **M4:** `eval/questions.yaml` (12), `eval/run_eval.py` -> `eval/results.md` (12/12 pass; scorecard 56/56 and
+  280/280 cells), `docs/assumptions.md`, `README.md`.
+- Tests: 148 passing, all offline. Real uvicorn + streamlit startup verified.
+
+### Decisions (sprint, developer-specified)
+- `AskResponse` (route, status, answer, scorecard_sources, charter_sources, guard_notes, data_version) added in
+  `app/schemas/answer.py` per the developer's /ask spec; the §6 `AnswerResponse` is not used yet.
+- Metric answers never use the LLM (templates); narrative answers in extractive mode quote only digit-free charter
+  sentences, so the number guard holds by construction.
+- Router: "overview" words are ignored when a metric is asked (keeps "What is the adoption of X" a metric question).
+
+### Open points (after the demo)
+- Not done from the earlier review: change-log BEFORE/AFTER effects, restart survival of processed data,
+  `docs/requirements_traceability.md`.
+- Exercise Bedrock live after `aws login` (`LLM_MODE=bedrock`), then re-run `eval/run_eval.py`.
+- architecture.md not yet updated for the sprint files (chunker, injection, index, router, guards, answer, report).
