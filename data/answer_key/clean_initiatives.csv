@@ -1,0 +1,9 @@
+initiative_id,name,type,business_unit,go_live_date,licensed_users,planned_annual_benefit,currency
+INIT-001,HR Policy Copilot,Copilot,Human Resources,2025-11-15,1000,320000,USD
+INIT-002,IT Helpdesk Bot,Conversational bot,IT Operations,2025-12-15,2500,420000,USD
+INIT-003,Sales Forecast Model,Predictive model,Sales,2026-01-10,400,300000,USD
+INIT-004,Contract Review Assistant,Copilot,Legal,2026-02-20,500,240000,USD
+INIT-005,Customer Service Chatbot,Conversational bot,Customer Operations,2025-09-01,1200,600000,USD
+INIT-006,Invoice Anomaly Detector,Predictive model,Finance,2026-03-16,200,250000,USD
+INIT-007,Marketing Content Copilot,Copilot,Marketing,2026-04-13,300,180000,USD
+INIT-008,Demand Planning Model,Predictive model,Supply Chain,2026-06-01,150,350000,USD

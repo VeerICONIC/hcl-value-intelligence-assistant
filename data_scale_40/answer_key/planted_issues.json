@@ -1,0 +1,1246 @@
+[
+  {
+    "id": "DQ-07",
+    "file": "initiatives.csv",
+    "description": "go_live_date uses mixed formats: ISO, DD/MM/YYYY and 'Mon D YYYY'",
+    "expected_correction": "Parse all to ISO dates, day-first for numeric formats (assumption documented)",
+    "affects_metrics": [
+      "months_live",
+      "avg_monthly_benefit",
+      "payback_months",
+      "run_rate_vs_plan"
+    ]
+  },
+  {
+    "id": "DQ-03a",
+    "file": "initiatives.csv",
+    "description": "Numbers stored as text: licensed_users '1,000' (INIT-001), planned_annual_benefit '$600,000' (INIT-005)",
+    "expected_correction": "Strip separators and currency symbols, cast to numbers",
+    "affects_metrics": [
+      "adoption",
+      "run_rate_vs_plan"
+    ]
+  },
+  {
+    "id": "DQ-02a",
+    "file": "initiatives.csv",
+    "description": "Initiative name with stray whitespace and lower case (INIT-007)",
+    "expected_correction": "Trim and restore canonical name from config/initiatives.yaml",
+    "affects_metrics": []
+  },
+  {
+    "id": "R-DATE-INIT-009",
+    "file": "initiatives.csv",
+    "description": "INIT-009 go_live_date in a non-ISO format",
+    "expected_correction": "Parse to ISO (day-first for numeric dates)",
+    "affects_metrics": [
+      "months_live"
+    ]
+  },
+  {
+    "id": "R-NAME-INIT-010",
+    "file": "initiatives.csv",
+    "description": "INIT-010 name has stray whitespace and lower case",
+    "expected_correction": "Trim; restore canonical name",
+    "affects_metrics": []
+  },
+  {
+    "id": "R-NAME-INIT-011",
+    "file": "initiatives.csv",
+    "description": "INIT-011 name has stray whitespace and lower case",
+    "expected_correction": "Trim; restore canonical name",
+    "affects_metrics": []
+  },
+  {
+    "id": "R-NAME-INIT-013",
+    "file": "initiatives.csv",
+    "description": "INIT-013 name has stray whitespace and lower case",
+    "expected_correction": "Trim; restore canonical name",
+    "affects_metrics": []
+  },
+  {
+    "id": "R-DATE-INIT-013",
+    "file": "initiatives.csv",
+    "description": "INIT-013 go_live_date in a non-ISO format",
+    "expected_correction": "Parse to ISO (day-first for numeric dates)",
+    "affects_metrics": [
+      "months_live"
+    ]
+  },
+  {
+    "id": "R-DATE-INIT-015",
+    "file": "initiatives.csv",
+    "description": "INIT-015 go_live_date in a non-ISO format",
+    "expected_correction": "Parse to ISO (day-first for numeric dates)",
+    "affects_metrics": [
+      "months_live"
+    ]
+  },
+  {
+    "id": "R-MONEY-INIT-015",
+    "file": "initiatives.csv",
+    "description": "INIT-015 planned_annual_benefit stored as text with $ and commas",
+    "expected_correction": "Strip symbols, cast to number",
+    "affects_metrics": [
+      "run_rate_vs_plan"
+    ]
+  },
+  {
+    "id": "R-NAME-INIT-016",
+    "file": "initiatives.csv",
+    "description": "INIT-016 name has stray whitespace and lower case",
+    "expected_correction": "Trim; restore canonical name",
+    "affects_metrics": []
+  },
+  {
+    "id": "R-DATE-INIT-016",
+    "file": "initiatives.csv",
+    "description": "INIT-016 go_live_date in a non-ISO format",
+    "expected_correction": "Parse to ISO (day-first for numeric dates)",
+    "affects_metrics": [
+      "months_live"
+    ]
+  },
+  {
+    "id": "R-NAME-INIT-017",
+    "file": "initiatives.csv",
+    "description": "INIT-017 name has stray whitespace and lower case",
+    "expected_correction": "Trim; restore canonical name",
+    "affects_metrics": []
+  },
+  {
+    "id": "R-MONEY-INIT-018",
+    "file": "initiatives.csv",
+    "description": "INIT-018 planned_annual_benefit stored as text with $ and commas",
+    "expected_correction": "Strip symbols, cast to number",
+    "affects_metrics": [
+      "run_rate_vs_plan"
+    ]
+  },
+  {
+    "id": "R-MONEY-INIT-019",
+    "file": "initiatives.csv",
+    "description": "INIT-019 planned_annual_benefit stored as text with $ and commas",
+    "expected_correction": "Strip symbols, cast to number",
+    "affects_metrics": [
+      "run_rate_vs_plan"
+    ]
+  },
+  {
+    "id": "R-NAME-INIT-019",
+    "file": "initiatives.csv",
+    "description": "INIT-019 name has stray whitespace and lower case",
+    "expected_correction": "Trim; restore canonical name",
+    "affects_metrics": []
+  },
+  {
+    "id": "R-MONEY-INIT-020",
+    "file": "initiatives.csv",
+    "description": "INIT-020 planned_annual_benefit stored as text with $ and commas",
+    "expected_correction": "Strip symbols, cast to number",
+    "affects_metrics": [
+      "run_rate_vs_plan"
+    ]
+  },
+  {
+    "id": "R-DATE-INIT-020",
+    "file": "initiatives.csv",
+    "description": "INIT-020 go_live_date in a non-ISO format",
+    "expected_correction": "Parse to ISO (day-first for numeric dates)",
+    "affects_metrics": [
+      "months_live"
+    ]
+  },
+  {
+    "id": "R-NAME-INIT-021",
+    "file": "initiatives.csv",
+    "description": "INIT-021 name has stray whitespace and lower case",
+    "expected_correction": "Trim; restore canonical name",
+    "affects_metrics": []
+  },
+  {
+    "id": "R-DATE-INIT-024",
+    "file": "initiatives.csv",
+    "description": "INIT-024 go_live_date in a non-ISO format",
+    "expected_correction": "Parse to ISO (day-first for numeric dates)",
+    "affects_metrics": [
+      "months_live"
+    ]
+  },
+  {
+    "id": "R-NAME-INIT-025",
+    "file": "initiatives.csv",
+    "description": "INIT-025 name has stray whitespace and lower case",
+    "expected_correction": "Trim; restore canonical name",
+    "affects_metrics": []
+  },
+  {
+    "id": "R-MONEY-INIT-026",
+    "file": "initiatives.csv",
+    "description": "INIT-026 planned_annual_benefit stored as text with $ and commas",
+    "expected_correction": "Strip symbols, cast to number",
+    "affects_metrics": [
+      "run_rate_vs_plan"
+    ]
+  },
+  {
+    "id": "R-DATE-INIT-026",
+    "file": "initiatives.csv",
+    "description": "INIT-026 go_live_date in a non-ISO format",
+    "expected_correction": "Parse to ISO (day-first for numeric dates)",
+    "affects_metrics": [
+      "months_live"
+    ]
+  },
+  {
+    "id": "R-DATE-INIT-027",
+    "file": "initiatives.csv",
+    "description": "INIT-027 go_live_date in a non-ISO format",
+    "expected_correction": "Parse to ISO (day-first for numeric dates)",
+    "affects_metrics": [
+      "months_live"
+    ]
+  },
+  {
+    "id": "R-NAME-INIT-029",
+    "file": "initiatives.csv",
+    "description": "INIT-029 name has stray whitespace and lower case",
+    "expected_correction": "Trim; restore canonical name",
+    "affects_metrics": []
+  },
+  {
+    "id": "R-MONEY-INIT-030",
+    "file": "initiatives.csv",
+    "description": "INIT-030 planned_annual_benefit stored as text with $ and commas",
+    "expected_correction": "Strip symbols, cast to number",
+    "affects_metrics": [
+      "run_rate_vs_plan"
+    ]
+  },
+  {
+    "id": "R-MONEY-INIT-031",
+    "file": "initiatives.csv",
+    "description": "INIT-031 planned_annual_benefit stored as text with $ and commas",
+    "expected_correction": "Strip symbols, cast to number",
+    "affects_metrics": [
+      "run_rate_vs_plan"
+    ]
+  },
+  {
+    "id": "R-DATE-INIT-032",
+    "file": "initiatives.csv",
+    "description": "INIT-032 go_live_date in a non-ISO format",
+    "expected_correction": "Parse to ISO (day-first for numeric dates)",
+    "affects_metrics": [
+      "months_live"
+    ]
+  },
+  {
+    "id": "R-MONEY-INIT-035",
+    "file": "initiatives.csv",
+    "description": "INIT-035 planned_annual_benefit stored as text with $ and commas",
+    "expected_correction": "Strip symbols, cast to number",
+    "affects_metrics": [
+      "run_rate_vs_plan"
+    ]
+  },
+  {
+    "id": "R-DATE-INIT-035",
+    "file": "initiatives.csv",
+    "description": "INIT-035 go_live_date in a non-ISO format",
+    "expected_correction": "Parse to ISO (day-first for numeric dates)",
+    "affects_metrics": [
+      "months_live"
+    ]
+  },
+  {
+    "id": "R-MONEY-INIT-036",
+    "file": "initiatives.csv",
+    "description": "INIT-036 planned_annual_benefit stored as text with $ and commas",
+    "expected_correction": "Strip symbols, cast to number",
+    "affects_metrics": [
+      "run_rate_vs_plan"
+    ]
+  },
+  {
+    "id": "R-NAME-INIT-037",
+    "file": "initiatives.csv",
+    "description": "INIT-037 name has stray whitespace and lower case",
+    "expected_correction": "Trim; restore canonical name",
+    "affects_metrics": []
+  },
+  {
+    "id": "R-NAME-INIT-038",
+    "file": "initiatives.csv",
+    "description": "INIT-038 name has stray whitespace and lower case",
+    "expected_correction": "Trim; restore canonical name",
+    "affects_metrics": []
+  },
+  {
+    "id": "R-DATE-INIT-038",
+    "file": "initiatives.csv",
+    "description": "INIT-038 go_live_date in a non-ISO format",
+    "expected_correction": "Parse to ISO (day-first for numeric dates)",
+    "affects_metrics": [
+      "months_live"
+    ]
+  },
+  {
+    "id": "R-DATE-INIT-039",
+    "file": "initiatives.csv",
+    "description": "INIT-039 go_live_date in a non-ISO format",
+    "expected_correction": "Parse to ISO (day-first for numeric dates)",
+    "affects_metrics": [
+      "months_live"
+    ]
+  },
+  {
+    "id": "R-NAME-INIT-039",
+    "file": "initiatives.csv",
+    "description": "INIT-039 name has stray whitespace and lower case",
+    "expected_correction": "Trim; restore canonical name",
+    "affects_metrics": []
+  },
+  {
+    "id": "R-DATE-INIT-040",
+    "file": "initiatives.csv",
+    "description": "INIT-040 go_live_date in a non-ISO format",
+    "expected_correction": "Parse to ISO (day-first for numeric dates)",
+    "affects_metrics": [
+      "months_live"
+    ]
+  },
+  {
+    "id": "DQ-04",
+    "file": "weekly_usage.csv",
+    "description": "Weekly active users reported under different metric names: WAU, weekly_active_users, 'Active Users (weekly)', 'weekly active users'",
+    "expected_correction": "Map all aliases to the canonical metric weekly_active_users",
+    "affects_metrics": [
+      "adoption",
+      "wau_change"
+    ]
+  },
+  {
+    "id": "DQ-02b",
+    "file": "weekly_usage.csv",
+    "description": "INIT-003 appears as 'init_3', 'INIT-003' and ' INIT-3 '",
+    "expected_correction": "Normalise IDs to INIT-NNN",
+    "affects_metrics": [
+      "adoption",
+      "wau_change"
+    ]
+  },
+  {
+    "id": "DQ-07b",
+    "file": "weekly_usage.csv",
+    "description": "week_start for INIT-001 week 2 written as 'Nov 2 2026'",
+    "expected_correction": "Parse to ISO date",
+    "affects_metrics": []
+  },
+  {
+    "id": "DQ-08",
+    "file": "weekly_usage.csv",
+    "description": "INIT-004 first-week WAU recorded as -130",
+    "expected_correction": "Treat as sign typo, correct to 130 (assumption documented)",
+    "affects_metrics": [
+      "wau_change"
+    ]
+  },
+  {
+    "id": "DQ-09",
+    "file": "weekly_usage.csv",
+    "description": "INIT-008 week 2 WAU = 380, above its 150 licensed users",
+    "expected_correction": "Flag as invalid and exclude; no metric uses week 2, so the scorecard is unaffected",
+    "affects_metrics": []
+  },
+  {
+    "id": "DQ-10",
+    "file": "weekly_usage.csv",
+    "description": "INIT-007 has no row for week starting 2026-11-02",
+    "expected_correction": "Flag; WAU change uses first and latest available weeks (assumption A4); scorecard unaffected",
+    "affects_metrics": []
+  },
+  {
+    "id": "DQ-03b",
+    "file": "weekly_usage.csv",
+    "description": "INIT-002 latest-week WAU stored as text '1,625'",
+    "expected_correction": "Strip separator, cast to integer",
+    "affects_metrics": [
+      "adoption",
+      "wau_change"
+    ]
+  },
+  {
+    "id": "R-NEG-INIT-009",
+    "file": "weekly_usage.csv",
+    "description": "INIT-009 one WAU value has a negative sign",
+    "expected_correction": "Treat as sign typo, take absolute value",
+    "affects_metrics": [
+      "adoption",
+      "wau_change"
+    ]
+  },
+  {
+    "id": "R-DUP-INIT-010",
+    "file": "weekly_usage.csv",
+    "description": "INIT-010 one row duplicated",
+    "expected_correction": "Drop exact duplicates",
+    "affects_metrics": []
+  },
+  {
+    "id": "R-BAD-INIT-011",
+    "file": "weekly_usage.csv",
+    "description": "INIT-011 week-2 WAU above licensed users",
+    "expected_correction": "Flag and exclude; week 2 is not used by any metric",
+    "affects_metrics": []
+  },
+  {
+    "id": "R-NEG-INIT-011",
+    "file": "weekly_usage.csv",
+    "description": "INIT-011 one WAU value has a negative sign",
+    "expected_correction": "Treat as sign typo, take absolute value",
+    "affects_metrics": [
+      "adoption",
+      "wau_change"
+    ]
+  },
+  {
+    "id": "R-BAD-INIT-012",
+    "file": "weekly_usage.csv",
+    "description": "INIT-012 week-2 WAU above licensed users",
+    "expected_correction": "Flag and exclude; week 2 is not used by any metric",
+    "affects_metrics": []
+  },
+  {
+    "id": "R-ID-INIT-013",
+    "file": "weekly_usage.csv",
+    "description": "INIT-013 ID written in a variant format on one row",
+    "expected_correction": "Normalise to INIT-NNN",
+    "affects_metrics": [
+      "adoption",
+      "wau_change"
+    ]
+  },
+  {
+    "id": "R-MISS-INIT-013",
+    "file": "weekly_usage.csv",
+    "description": "INIT-013 week-2 row missing",
+    "expected_correction": "Flag; metrics use first and latest weeks",
+    "affects_metrics": []
+  },
+  {
+    "id": "R-ALIAS-INIT-014",
+    "file": "weekly_usage.csv",
+    "description": "INIT-014 WAU reported as 'WAU'",
+    "expected_correction": "Map to weekly_active_users",
+    "affects_metrics": [
+      "adoption",
+      "wau_change"
+    ]
+  },
+  {
+    "id": "R-DUP-INIT-014",
+    "file": "weekly_usage.csv",
+    "description": "INIT-014 one row duplicated",
+    "expected_correction": "Drop exact duplicates",
+    "affects_metrics": []
+  },
+  {
+    "id": "R-NEG-INIT-015",
+    "file": "weekly_usage.csv",
+    "description": "INIT-015 one WAU value has a negative sign",
+    "expected_correction": "Treat as sign typo, take absolute value",
+    "affects_metrics": [
+      "adoption",
+      "wau_change"
+    ]
+  },
+  {
+    "id": "R-BAD-INIT-016",
+    "file": "weekly_usage.csv",
+    "description": "INIT-016 week-2 WAU above licensed users",
+    "expected_correction": "Flag and exclude; week 2 is not used by any metric",
+    "affects_metrics": []
+  },
+  {
+    "id": "R-TEXT-INIT-016",
+    "file": "weekly_usage.csv",
+    "description": "INIT-016 one WAU value stored as text with a comma",
+    "expected_correction": "Cast to integer",
+    "affects_metrics": [
+      "adoption",
+      "wau_change"
+    ]
+  },
+  {
+    "id": "R-MISS-INIT-017",
+    "file": "weekly_usage.csv",
+    "description": "INIT-017 week-2 row missing",
+    "expected_correction": "Flag; metrics use first and latest weeks",
+    "affects_metrics": []
+  },
+  {
+    "id": "R-BAD-INIT-018",
+    "file": "weekly_usage.csv",
+    "description": "INIT-018 week-2 WAU above licensed users",
+    "expected_correction": "Flag and exclude; week 2 is not used by any metric",
+    "affects_metrics": []
+  },
+  {
+    "id": "R-ID-INIT-020",
+    "file": "weekly_usage.csv",
+    "description": "INIT-020 ID written in a variant format on one row",
+    "expected_correction": "Normalise to INIT-NNN",
+    "affects_metrics": [
+      "adoption",
+      "wau_change"
+    ]
+  },
+  {
+    "id": "R-ID-INIT-021",
+    "file": "weekly_usage.csv",
+    "description": "INIT-021 ID written in a variant format on one row",
+    "expected_correction": "Normalise to INIT-NNN",
+    "affects_metrics": [
+      "adoption",
+      "wau_change"
+    ]
+  },
+  {
+    "id": "R-ALIAS-INIT-022",
+    "file": "weekly_usage.csv",
+    "description": "INIT-022 WAU reported as 'WAU'",
+    "expected_correction": "Map to weekly_active_users",
+    "affects_metrics": [
+      "adoption",
+      "wau_change"
+    ]
+  },
+  {
+    "id": "R-DUP-INIT-022",
+    "file": "weekly_usage.csv",
+    "description": "INIT-022 one row duplicated",
+    "expected_correction": "Drop exact duplicates",
+    "affects_metrics": []
+  },
+  {
+    "id": "R-ID-INIT-023",
+    "file": "weekly_usage.csv",
+    "description": "INIT-023 ID written in a variant format on one row",
+    "expected_correction": "Normalise to INIT-NNN",
+    "affects_metrics": [
+      "adoption",
+      "wau_change"
+    ]
+  },
+  {
+    "id": "R-ALIAS-INIT-024",
+    "file": "weekly_usage.csv",
+    "description": "INIT-024 WAU reported as 'WAU'",
+    "expected_correction": "Map to weekly_active_users",
+    "affects_metrics": [
+      "adoption",
+      "wau_change"
+    ]
+  },
+  {
+    "id": "R-ID-INIT-025",
+    "file": "weekly_usage.csv",
+    "description": "INIT-025 ID written in a variant format on one row",
+    "expected_correction": "Normalise to INIT-NNN",
+    "affects_metrics": [
+      "adoption",
+      "wau_change"
+    ]
+  },
+  {
+    "id": "R-TEXT-INIT-026",
+    "file": "weekly_usage.csv",
+    "description": "INIT-026 one WAU value stored as text with a comma",
+    "expected_correction": "Cast to integer",
+    "affects_metrics": [
+      "adoption",
+      "wau_change"
+    ]
+  },
+  {
+    "id": "R-ALIAS-INIT-027",
+    "file": "weekly_usage.csv",
+    "description": "INIT-027 WAU reported as 'Active Users (weekly)'",
+    "expected_correction": "Map to weekly_active_users",
+    "affects_metrics": [
+      "adoption",
+      "wau_change"
+    ]
+  },
+  {
+    "id": "R-TEXT-INIT-027",
+    "file": "weekly_usage.csv",
+    "description": "INIT-027 one WAU value stored as text with a comma",
+    "expected_correction": "Cast to integer",
+    "affects_metrics": [
+      "adoption",
+      "wau_change"
+    ]
+  },
+  {
+    "id": "R-ALIAS-INIT-028",
+    "file": "weekly_usage.csv",
+    "description": "INIT-028 WAU reported as 'WAU'",
+    "expected_correction": "Map to weekly_active_users",
+    "affects_metrics": [
+      "adoption",
+      "wau_change"
+    ]
+  },
+  {
+    "id": "R-NEG-INIT-028",
+    "file": "weekly_usage.csv",
+    "description": "INIT-028 one WAU value has a negative sign",
+    "expected_correction": "Treat as sign typo, take absolute value",
+    "affects_metrics": [
+      "adoption",
+      "wau_change"
+    ]
+  },
+  {
+    "id": "R-DUP-INIT-029",
+    "file": "weekly_usage.csv",
+    "description": "INIT-029 one row duplicated",
+    "expected_correction": "Drop exact duplicates",
+    "affects_metrics": []
+  },
+  {
+    "id": "R-MISS-INIT-029",
+    "file": "weekly_usage.csv",
+    "description": "INIT-029 week-2 row missing",
+    "expected_correction": "Flag; metrics use first and latest weeks",
+    "affects_metrics": []
+  },
+  {
+    "id": "R-BAD-INIT-030",
+    "file": "weekly_usage.csv",
+    "description": "INIT-030 week-2 WAU above licensed users",
+    "expected_correction": "Flag and exclude; week 2 is not used by any metric",
+    "affects_metrics": []
+  },
+  {
+    "id": "R-ID-INIT-030",
+    "file": "weekly_usage.csv",
+    "description": "INIT-030 ID written in a variant format on one row",
+    "expected_correction": "Normalise to INIT-NNN",
+    "affects_metrics": [
+      "adoption",
+      "wau_change"
+    ]
+  },
+  {
+    "id": "R-ID-INIT-031",
+    "file": "weekly_usage.csv",
+    "description": "INIT-031 ID written in a variant format on one row",
+    "expected_correction": "Normalise to INIT-NNN",
+    "affects_metrics": [
+      "adoption",
+      "wau_change"
+    ]
+  },
+  {
+    "id": "R-TEXT-INIT-032",
+    "file": "weekly_usage.csv",
+    "description": "INIT-032 one WAU value stored as text with a comma",
+    "expected_correction": "Cast to integer",
+    "affects_metrics": [
+      "adoption",
+      "wau_change"
+    ]
+  },
+  {
+    "id": "R-DUP-INIT-032",
+    "file": "weekly_usage.csv",
+    "description": "INIT-032 one row duplicated",
+    "expected_correction": "Drop exact duplicates",
+    "affects_metrics": []
+  },
+  {
+    "id": "R-TEXT-INIT-033",
+    "file": "weekly_usage.csv",
+    "description": "INIT-033 one WAU value stored as text with a comma",
+    "expected_correction": "Cast to integer",
+    "affects_metrics": [
+      "adoption",
+      "wau_change"
+    ]
+  },
+  {
+    "id": "R-BAD-INIT-033",
+    "file": "weekly_usage.csv",
+    "description": "INIT-033 week-2 WAU above licensed users",
+    "expected_correction": "Flag and exclude; week 2 is not used by any metric",
+    "affects_metrics": []
+  },
+  {
+    "id": "R-BAD-INIT-034",
+    "file": "weekly_usage.csv",
+    "description": "INIT-034 week-2 WAU above licensed users",
+    "expected_correction": "Flag and exclude; week 2 is not used by any metric",
+    "affects_metrics": []
+  },
+  {
+    "id": "R-TEXT-INIT-035",
+    "file": "weekly_usage.csv",
+    "description": "INIT-035 one WAU value stored as text with a comma",
+    "expected_correction": "Cast to integer",
+    "affects_metrics": [
+      "adoption",
+      "wau_change"
+    ]
+  },
+  {
+    "id": "R-NEG-INIT-037",
+    "file": "weekly_usage.csv",
+    "description": "INIT-037 one WAU value has a negative sign",
+    "expected_correction": "Treat as sign typo, take absolute value",
+    "affects_metrics": [
+      "adoption",
+      "wau_change"
+    ]
+  },
+  {
+    "id": "R-BAD-INIT-038",
+    "file": "weekly_usage.csv",
+    "description": "INIT-038 week-2 WAU above licensed users",
+    "expected_correction": "Flag and exclude; week 2 is not used by any metric",
+    "affects_metrics": []
+  },
+  {
+    "id": "R-ID-INIT-039",
+    "file": "weekly_usage.csv",
+    "description": "INIT-039 ID written in a variant format on one row",
+    "expected_correction": "Normalise to INIT-NNN",
+    "affects_metrics": [
+      "adoption",
+      "wau_change"
+    ]
+  },
+  {
+    "id": "R-DUP-INIT-039",
+    "file": "weekly_usage.csv",
+    "description": "INIT-039 one row duplicated",
+    "expected_correction": "Drop exact duplicates",
+    "affects_metrics": []
+  },
+  {
+    "id": "DQ-01",
+    "file": "weekly_usage.csv",
+    "description": "Exact duplicate row for INIT-002, week starting 2026-11-02",
+    "expected_correction": "Drop exact duplicates",
+    "affects_metrics": []
+  },
+  {
+    "id": "DQ-04b",
+    "file": "financials.xlsx",
+    "description": "Benefit and cost reported under different measure names (Benefit to date, realised_benefit, value_delivered, Cost to date, total_cost, spend)",
+    "expected_correction": "Map aliases to canonical benefit_to_date / cost_to_date",
+    "affects_metrics": [
+      "roi",
+      "avg_monthly_benefit",
+      "payback_months",
+      "run_rate_vs_plan"
+    ]
+  },
+  {
+    "id": "DQ-05",
+    "file": "financials.xlsx",
+    "description": "INIT-005 benefit reported in thousands (390, unit USD '000)",
+    "expected_correction": "Multiply by 1,000 to USD",
+    "affects_metrics": [
+      "roi",
+      "avg_monthly_benefit",
+      "payback_months",
+      "run_rate_vs_plan",
+      "status"
+    ]
+  },
+  {
+    "id": "DQ-06",
+    "file": "financials.xlsx",
+    "description": "INIT-002 cost reported as 11 monthly rows (basis = monthly) instead of one cumulative figure",
+    "expected_correction": "Sum the 11 monthly rows (Dec 2025 to Oct 2026, all before the as-of date) to get cost_to_date = 220,000",
+    "affects_metrics": [
+      "roi",
+      "payback_months"
+    ]
+  },
+  {
+    "id": "DQ-03c",
+    "file": "financials.xlsx",
+    "description": "INIT-007 benefit stored as text '$97.5k'",
+    "expected_correction": "Parse to 97,500",
+    "affects_metrics": [
+      "roi",
+      "avg_monthly_benefit",
+      "payback_months",
+      "run_rate_vs_plan"
+    ]
+  },
+  {
+    "id": "DQ-02c",
+    "file": "financials.xlsx",
+    "description": "INIT-003 written as ' INIT-3 '",
+    "expected_correction": "Normalise to INIT-003",
+    "affects_metrics": [
+      "roi"
+    ]
+  },
+  {
+    "id": "R-MONTHLY-INIT-009",
+    "file": "financials.xlsx",
+    "description": "INIT-009 cost reported as 6 monthly rows",
+    "expected_correction": "Sum monthly rows up to the as-of date",
+    "affects_metrics": [
+      "roi",
+      "payback_months"
+    ]
+  },
+  {
+    "id": "R-MONTHLY-INIT-010",
+    "file": "financials.xlsx",
+    "description": "INIT-010 cost reported as 11 monthly rows",
+    "expected_correction": "Sum monthly rows up to the as-of date",
+    "affects_metrics": [
+      "roi",
+      "payback_months"
+    ]
+  },
+  {
+    "id": "R-MONTHLY-INIT-011",
+    "file": "financials.xlsx",
+    "description": "INIT-011 cost reported as 6 monthly rows",
+    "expected_correction": "Sum monthly rows up to the as-of date",
+    "affects_metrics": [
+      "roi",
+      "payback_months"
+    ]
+  },
+  {
+    "id": "R-KTEXT-INIT-011",
+    "file": "financials.xlsx",
+    "description": "INIT-011 benefit stored as text like '$123.4k'",
+    "expected_correction": "Parse k suffix and $",
+    "affects_metrics": [
+      "roi"
+    ]
+  },
+  {
+    "id": "R-MONTHLY-INIT-012",
+    "file": "financials.xlsx",
+    "description": "INIT-012 cost reported as 10 monthly rows",
+    "expected_correction": "Sum monthly rows up to the as-of date",
+    "affects_metrics": [
+      "roi",
+      "payback_months"
+    ]
+  },
+  {
+    "id": "R-MEASURE-INIT-012",
+    "file": "financials.xlsx",
+    "description": "INIT-012 benefit/cost under alias measure names",
+    "expected_correction": "Map to canonical measures",
+    "affects_metrics": [
+      "roi"
+    ]
+  },
+  {
+    "id": "R-KTEXT-INIT-013",
+    "file": "financials.xlsx",
+    "description": "INIT-013 benefit stored as text like '$123.4k'",
+    "expected_correction": "Parse k suffix and $",
+    "affects_metrics": [
+      "roi"
+    ]
+  },
+  {
+    "id": "R-K-INIT-014",
+    "file": "financials.xlsx",
+    "description": "INIT-014 benefit reported in thousands",
+    "expected_correction": "Multiply by 1,000",
+    "affects_metrics": [
+      "roi",
+      "avg_monthly_benefit",
+      "payback_months",
+      "run_rate_vs_plan"
+    ]
+  },
+  {
+    "id": "R-MONTHLY-INIT-015",
+    "file": "financials.xlsx",
+    "description": "INIT-015 cost reported as 10 monthly rows",
+    "expected_correction": "Sum monthly rows up to the as-of date",
+    "affects_metrics": [
+      "roi",
+      "payback_months"
+    ]
+  },
+  {
+    "id": "R-MEASURE-INIT-016",
+    "file": "financials.xlsx",
+    "description": "INIT-016 benefit/cost under alias measure names",
+    "expected_correction": "Map to canonical measures",
+    "affects_metrics": [
+      "roi"
+    ]
+  },
+  {
+    "id": "R-K-INIT-016",
+    "file": "financials.xlsx",
+    "description": "INIT-016 benefit reported in thousands",
+    "expected_correction": "Multiply by 1,000",
+    "affects_metrics": [
+      "roi",
+      "avg_monthly_benefit",
+      "payback_months",
+      "run_rate_vs_plan"
+    ]
+  },
+  {
+    "id": "R-KTEXT-INIT-017",
+    "file": "financials.xlsx",
+    "description": "INIT-017 benefit stored as text like '$123.4k'",
+    "expected_correction": "Parse k suffix and $",
+    "affects_metrics": [
+      "roi"
+    ]
+  },
+  {
+    "id": "R-MEASURE-INIT-018",
+    "file": "financials.xlsx",
+    "description": "INIT-018 benefit/cost under alias measure names",
+    "expected_correction": "Map to canonical measures",
+    "affects_metrics": [
+      "roi"
+    ]
+  },
+  {
+    "id": "R-K-INIT-019",
+    "file": "financials.xlsx",
+    "description": "INIT-019 benefit reported in thousands",
+    "expected_correction": "Multiply by 1,000",
+    "affects_metrics": [
+      "roi",
+      "avg_monthly_benefit",
+      "payback_months",
+      "run_rate_vs_plan"
+    ]
+  },
+  {
+    "id": "R-MEASURE-INIT-020",
+    "file": "financials.xlsx",
+    "description": "INIT-020 benefit/cost under alias measure names",
+    "expected_correction": "Map to canonical measures",
+    "affects_metrics": [
+      "roi"
+    ]
+  },
+  {
+    "id": "R-FID-INIT-020",
+    "file": "financials.xlsx",
+    "description": "INIT-020 benefit row ID in a variant format",
+    "expected_correction": "Normalise to INIT-NNN",
+    "affects_metrics": [
+      "roi"
+    ]
+  },
+  {
+    "id": "R-KTEXT-INIT-021",
+    "file": "financials.xlsx",
+    "description": "INIT-021 benefit stored as text like '$123.4k'",
+    "expected_correction": "Parse k suffix and $",
+    "affects_metrics": [
+      "roi"
+    ]
+  },
+  {
+    "id": "R-FID-INIT-021",
+    "file": "financials.xlsx",
+    "description": "INIT-021 benefit row ID in a variant format",
+    "expected_correction": "Normalise to INIT-NNN",
+    "affects_metrics": [
+      "roi"
+    ]
+  },
+  {
+    "id": "R-KTEXT-INIT-022",
+    "file": "financials.xlsx",
+    "description": "INIT-022 benefit stored as text like '$123.4k'",
+    "expected_correction": "Parse k suffix and $",
+    "affects_metrics": [
+      "roi"
+    ]
+  },
+  {
+    "id": "R-KTEXT-INIT-023",
+    "file": "financials.xlsx",
+    "description": "INIT-023 benefit stored as text like '$123.4k'",
+    "expected_correction": "Parse k suffix and $",
+    "affects_metrics": [
+      "roi"
+    ]
+  },
+  {
+    "id": "R-FID-INIT-023",
+    "file": "financials.xlsx",
+    "description": "INIT-023 benefit row ID in a variant format",
+    "expected_correction": "Normalise to INIT-NNN",
+    "affects_metrics": [
+      "roi"
+    ]
+  },
+  {
+    "id": "R-FID-INIT-024",
+    "file": "financials.xlsx",
+    "description": "INIT-024 benefit row ID in a variant format",
+    "expected_correction": "Normalise to INIT-NNN",
+    "affects_metrics": [
+      "roi"
+    ]
+  },
+  {
+    "id": "R-FID-INIT-025",
+    "file": "financials.xlsx",
+    "description": "INIT-025 benefit row ID in a variant format",
+    "expected_correction": "Normalise to INIT-NNN",
+    "affects_metrics": [
+      "roi"
+    ]
+  },
+  {
+    "id": "R-MEASURE-INIT-026",
+    "file": "financials.xlsx",
+    "description": "INIT-026 benefit/cost under alias measure names",
+    "expected_correction": "Map to canonical measures",
+    "affects_metrics": [
+      "roi"
+    ]
+  },
+  {
+    "id": "R-KTEXT-INIT-026",
+    "file": "financials.xlsx",
+    "description": "INIT-026 benefit stored as text like '$123.4k'",
+    "expected_correction": "Parse k suffix and $",
+    "affects_metrics": [
+      "roi"
+    ]
+  },
+  {
+    "id": "R-MEASURE-INIT-027",
+    "file": "financials.xlsx",
+    "description": "INIT-027 benefit/cost under alias measure names",
+    "expected_correction": "Map to canonical measures",
+    "affects_metrics": [
+      "roi"
+    ]
+  },
+  {
+    "id": "R-MONTHLY-INIT-027",
+    "file": "financials.xlsx",
+    "description": "INIT-027 cost reported as 10 monthly rows",
+    "expected_correction": "Sum monthly rows up to the as-of date",
+    "affects_metrics": [
+      "roi",
+      "payback_months"
+    ]
+  },
+  {
+    "id": "R-FID-INIT-028",
+    "file": "financials.xlsx",
+    "description": "INIT-028 benefit row ID in a variant format",
+    "expected_correction": "Normalise to INIT-NNN",
+    "affects_metrics": [
+      "roi"
+    ]
+  },
+  {
+    "id": "R-FID-INIT-029",
+    "file": "financials.xlsx",
+    "description": "INIT-029 benefit row ID in a variant format",
+    "expected_correction": "Normalise to INIT-NNN",
+    "affects_metrics": [
+      "roi"
+    ]
+  },
+  {
+    "id": "R-K-INIT-029",
+    "file": "financials.xlsx",
+    "description": "INIT-029 benefit reported in thousands",
+    "expected_correction": "Multiply by 1,000",
+    "affects_metrics": [
+      "roi",
+      "avg_monthly_benefit",
+      "payback_months",
+      "run_rate_vs_plan"
+    ]
+  },
+  {
+    "id": "R-MEASURE-INIT-030",
+    "file": "financials.xlsx",
+    "description": "INIT-030 benefit/cost under alias measure names",
+    "expected_correction": "Map to canonical measures",
+    "affects_metrics": [
+      "roi"
+    ]
+  },
+  {
+    "id": "R-KTEXT-INIT-031",
+    "file": "financials.xlsx",
+    "description": "INIT-031 benefit stored as text like '$123.4k'",
+    "expected_correction": "Parse k suffix and $",
+    "affects_metrics": [
+      "roi"
+    ]
+  },
+  {
+    "id": "R-K-INIT-032",
+    "file": "financials.xlsx",
+    "description": "INIT-032 benefit reported in thousands",
+    "expected_correction": "Multiply by 1,000",
+    "affects_metrics": [
+      "roi",
+      "avg_monthly_benefit",
+      "payback_months",
+      "run_rate_vs_plan"
+    ]
+  },
+  {
+    "id": "R-K-INIT-033",
+    "file": "financials.xlsx",
+    "description": "INIT-033 benefit reported in thousands",
+    "expected_correction": "Multiply by 1,000",
+    "affects_metrics": [
+      "roi",
+      "avg_monthly_benefit",
+      "payback_months",
+      "run_rate_vs_plan"
+    ]
+  },
+  {
+    "id": "R-FID-INIT-034",
+    "file": "financials.xlsx",
+    "description": "INIT-034 benefit row ID in a variant format",
+    "expected_correction": "Normalise to INIT-NNN",
+    "affects_metrics": [
+      "roi"
+    ]
+  },
+  {
+    "id": "R-MONTHLY-INIT-034",
+    "file": "financials.xlsx",
+    "description": "INIT-034 cost reported as 4 monthly rows",
+    "expected_correction": "Sum monthly rows up to the as-of date",
+    "affects_metrics": [
+      "roi",
+      "payback_months"
+    ]
+  },
+  {
+    "id": "R-MONTHLY-INIT-035",
+    "file": "financials.xlsx",
+    "description": "INIT-035 cost reported as 9 monthly rows",
+    "expected_correction": "Sum monthly rows up to the as-of date",
+    "affects_metrics": [
+      "roi",
+      "payback_months"
+    ]
+  },
+  {
+    "id": "R-MEASURE-INIT-035",
+    "file": "financials.xlsx",
+    "description": "INIT-035 benefit/cost under alias measure names",
+    "expected_correction": "Map to canonical measures",
+    "affects_metrics": [
+      "roi"
+    ]
+  },
+  {
+    "id": "R-MONTHLY-INIT-036",
+    "file": "financials.xlsx",
+    "description": "INIT-036 cost reported as 4 monthly rows",
+    "expected_correction": "Sum monthly rows up to the as-of date",
+    "affects_metrics": [
+      "roi",
+      "payback_months"
+    ]
+  },
+  {
+    "id": "R-FID-INIT-036",
+    "file": "financials.xlsx",
+    "description": "INIT-036 benefit row ID in a variant format",
+    "expected_correction": "Normalise to INIT-NNN",
+    "affects_metrics": [
+      "roi"
+    ]
+  },
+  {
+    "id": "R-FID-INIT-038",
+    "file": "financials.xlsx",
+    "description": "INIT-038 benefit row ID in a variant format",
+    "expected_correction": "Normalise to INIT-NNN",
+    "affects_metrics": [
+      "roi"
+    ]
+  },
+  {
+    "id": "R-KTEXT-INIT-038",
+    "file": "financials.xlsx",
+    "description": "INIT-038 benefit stored as text like '$123.4k'",
+    "expected_correction": "Parse k suffix and $",
+    "affects_metrics": [
+      "roi"
+    ]
+  },
+  {
+    "id": "R-MEASURE-INIT-039",
+    "file": "financials.xlsx",
+    "description": "INIT-039 benefit/cost under alias measure names",
+    "expected_correction": "Map to canonical measures",
+    "affects_metrics": [
+      "roi"
+    ]
+  },
+  {
+    "id": "R-MONTHLY-INIT-039",
+    "file": "financials.xlsx",
+    "description": "INIT-039 cost reported as 8 monthly rows",
+    "expected_correction": "Sum monthly rows up to the as-of date",
+    "affects_metrics": [
+      "roi",
+      "payback_months"
+    ]
+  },
+  {
+    "id": "R-MEASURE-INIT-040",
+    "file": "financials.xlsx",
+    "description": "INIT-040 benefit/cost under alias measure names",
+    "expected_correction": "Map to canonical measures",
+    "affects_metrics": [
+      "roi"
+    ]
+  },
+  {
+    "id": "R-FID-INIT-040",
+    "file": "financials.xlsx",
+    "description": "INIT-040 benefit row ID in a variant format",
+    "expected_correction": "Normalise to INIT-NNN",
+    "affects_metrics": [
+      "roi"
+    ]
+  },
+  {
+    "id": "DQ-11",
+    "file": "financials.xlsx",
+    "description": "A pre-computed reported_roi_pct is supplied, using benefit / cost x 100 instead of the brief's (benefit - cost) / cost",
+    "expected_correction": "Ignore for the scorecard; recompute ROI with the governed formula and log each mismatch",
+    "affects_metrics": [
+      "roi"
+    ]
+  }
+]

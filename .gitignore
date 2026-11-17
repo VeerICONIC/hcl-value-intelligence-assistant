@@ -1,0 +1,36 @@
+# --- Secrets and environment (D11: never commit credentials) -----------
+.env
+.env.*
+!.env.example
+.aws/
+*.pem
+*.key
+
+# --- Virtual environments ----------------------------------------------
+.venv/
+venv/
+.venv*/
+
+# --- Generated data ----------------------------------------------------
+# Pipeline outputs are reproducible from data/raw + code, so never committed.
+data/processed/*
+!data/processed/.gitkeep
+# ChromaDB persistent index (rebuilt by scripts/build_index.py)
+data/chroma/
+
+# --- Python and tool caches --------------------------------------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# --- Streamlit local secrets -------------------------------------------
+.streamlit/secrets.toml
+
+# --- OS / editor -------------------------------------------------------
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

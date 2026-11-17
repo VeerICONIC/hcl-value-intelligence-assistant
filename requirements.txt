@@ -1,0 +1,31 @@
+# Nimbus Value Intelligence Assistant - pinned dependencies (Python 3.12).
+# Versions marked (verified) ran together on Python 3.12.0 in our practice project.
+# Install:  .\.venv\Scripts\python.exe -m pip install -r requirements.txt
+
+# --- Contracts and settings ---------------------------------------------
+pydantic==2.14.3            # (verified) schemas / contracts
+pydantic-settings==2.16.3   # (verified) settings from env + .env
+
+# --- AWS Bedrock (boto3 directly, D2/D4) --------------------------------
+boto3[crt]==1.44.3          # (verified) [crt] is needed for profiles created by `aws login`
+
+# --- Data pipeline -------------------------------------------------------
+pandas==3.1.1               # (verified)
+openpyxl==3.1.5             # read/write financials.xlsx
+python-dateutil==2.9.0.post0  # mixed-format date parsing (ISO first, then day-first); botocore needs <3
+PyYAML==6.0.3               # (verified) config/*.yaml
+
+# --- Charters: parsing, vector store -------------------------------------
+pymupdf==2.1                # (verified) PDF charter parsing
+python-docx==1.2.0          # DOCX charters (parsing; also written by the practice-data generator)
+fpdf2==2.9.0                # PDF charter generation in scripts/generate_practice_data.py (imported as `fpdf`)
+chromadb==1.5.9             # (verified) persistent local vector store
+
+# --- API and dashboard ---------------------------------------------------
+fastapi==0.162.7            # (verified)
+uvicorn==0.54.0             # (verified)
+httpx==0.28.1               # (verified) dashboard -> API client; FastAPI TestClient
+streamlit==1.67.0           # (verified)
+
+# --- Tests ---------------------------------------------------------------
+pytest==9.2.0               # (verified)

@@ -1,0 +1,134 @@
+# Metric dictionary: how raw files map onto the governed data model (D10).
+#
+# When the real hackathon files arrive, adapt THIS file (column names, metric/measure
+# names, units), not the code. Matching of column headers, metric names, measure names,
+# units and basis values ignores case and surrounding whitespace.
+#
+# Loaded and validated by app/core/yaml_config.py; a mistake here fails at start-up
+# with a readable message.
+
+# --- Identifiers ---------------------------------------------------------------
+# Any spelling that contains exactly one number (" INIT-3 ", "init_3") becomes INIT-003.
+id_format:
+  prefix: "INIT-"
+  digits: 3
+
+# --- Dates -------------------------------------------------------------------
+# ISO YYYY-MM-DD is always parsed first (dateutil with day_first misreads 2025-09-01
+# as 9 January). Other numeric dates are day-first: 07/09/2026 = 7 September 2026.
+dates:
+  day_first: true
+
+# As-of date for "to date" figures and months live.
+#   auto       -> start of the latest usage week + (week_length_days - 1) = 2026-11-15
+#   YYYY-MM-DD -> a fixed date
+as_of: auto
+week_length_days: 7
+
+# Months live = days from go-live to as-of / days_per_month (assumption A1).
+days_per_month: 30.44
+
+# --- Numbers stored as text ---------------------------------------------------
+# "$600,000" -> 600000, "$97.5k" -> 97500.
+numbers:
+  currency_symbols: ["$"]
+  thousands_separator: ","
+  suffixes:
+    k: 1000
+    m: 1000000
+
+# All money is USD (assumption A5). Any other currency in initiatives.csv is rejected
+# for that row's planned benefit (logged), never converted.
+allowed_currencies: ["USD"]
+
+# --- Raw files ----------------------------------------------------------------
+# columns: canonical name -> accepted header spellings (canonical name is always accepted).
+# required: canonical columns that must be present. defaults: value used when an
+# optional column is absent from the file.
+files:
+  initiatives:
+    filename: initiatives.csv
+    columns:
+      initiative_id: ["initiative id", "id", "initiative"]
+      name: ["initiative name", "initiative_name"]
+      type: ["initiative type"]
+      business_unit: ["business unit", "bu"]
+      go_live_date: ["go live date", "go-live date", "golive_date"]
+      licensed_users: ["licensed users", "licenses", "licences"]
+      planned_annual_benefit: ["planned annual benefit", "planned_benefit"]
+      currency: []
+    required: [initiative_id, name, go_live_date, licensed_users, planned_annual_benefit]
+    defaults:
+      type: ""
+      business_unit: ""
+      currency: "USD"
+
+  weekly_usage:
+    filename: weekly_usage.csv
+    columns:
+      initiative_id: ["initiative id", "id", "initiative"]
+      week_start: ["week start", "week", "week_starting"]
+      metric_name: ["metric", "metric name"]
+      value: []
+    required: [initiative_id, week_start, metric_name, value]
+    defaults: {}
+
+  financials:
+    filename: financials.xlsx
+    sheet: financials
+    columns:
+      initiative_id: ["initiative id", "id", "initiative"]
+      report_date: ["report date", "date", "as_of"]
+      measure: ["measure name", "metric"]
+      value: []
+      unit: ["units"]
+      basis: ["reporting basis"]
+    required: [initiative_id, report_date, measure, value]
+    defaults:
+      unit: "USD"
+      basis: "cumulative"
+
+# --- Usage metrics (weekly_usage.csv, metric_name column) ----------------------
+# Rows with a metric name not listed here are excluded and logged (UNKNOWN_MEASURE).
+usage_metrics:
+  weekly_active_users:
+    aliases: ["WAU", "Active Users (weekly)", "weekly active users"]
+
+# --- Financial measures (financials.xlsx, measure column) ----------------------
+# role: benefit | cost  -> used by the scorecard
+#       check_only      -> never used for a metric; compared against the governed value
+# Monthly rows (basis = monthly) are summed up to the as-of date; cumulative rows use
+# the latest report on or before the as-of date.
+financial_measures:
+  benefit_to_date:
+    role: benefit
+    aliases: ["Benefit to date", "realised_benefit", "realized_benefit", "value_delivered"]
+  cost_to_date:
+    role: cost
+    aliases: ["Cost to date", "total_cost", "spend"]
+  monthly_cost:
+    role: cost
+    aliases: []
+  reported_roi_pct:
+    role: check_only
+    aliases: ["reported roi", "roi_pct"]
+
+# --- Units --------------------------------------------------------------------
+# kind must suit the measure: money for benefit/cost, percent for reported ROI.
+units:
+  "USD":
+    multiplier: 1
+    kind: money
+  "USD '000":
+    multiplier: 1000
+    kind: money
+  "%":
+    multiplier: 1
+    kind: percent
+
+basis_values: [cumulative, monthly]
+
+# --- Checks -------------------------------------------------------------------
+# A supplied reported_roi_pct differing from the governed ROI by more than this many
+# percentage points is logged (REPORTED_ROI_MISMATCH). It is never used.
+reported_roi_tolerance_pct_points: 0.1

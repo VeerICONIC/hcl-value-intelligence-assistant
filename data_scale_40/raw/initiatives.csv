@@ -1,0 +1,41 @@
+initiative_id,name,type,business_unit,go_live_date,licensed_users,planned_annual_benefit,currency
+INIT-001,HR Policy Copilot,Copilot,Human Resources,2025-11-15,"1,000",320000,USD
+INIT-002,IT Helpdesk Bot,Conversational bot,IT Operations,15/12/2025,2500,420000,USD
+INIT-003,Sales Forecast Model,Predictive model,Sales,Jan 10 2026,400,300000,USD
+INIT-004,Contract Review Assistant,Copilot,Legal,2026-02-20,500,240000,USD
+INIT-005,Customer Service Chatbot,Conversational bot,Customer Operations,2025-09-01,1200,"$600,000",USD
+INIT-006,Invoice Anomaly Detector,Predictive model,Finance,16/03/2026,200,250000,USD
+INIT-007,  marketing content copilot ,Copilot,Marketing,2026-04-13,300,180000,USD
+INIT-008,Demand Planning Model,Predictive model,Supply Chain,2026-06-01,150,350000,USD
+INIT-009,Compliance Bot,Conversational bot,Compliance,14/03/2026,1470,722000,USD
+INIT-010,  quality assistant ,Copilot,Quality,2025-03-29,2750,700000,USD
+INIT-011,  onboarding bot ,Conversational bot,Onboarding,2025-11-27,3440,127000,USD
+INIT-012,Audit Assistant,Copilot,Audit,2026-04-01,2160,553000,USD
+INIT-013,  training risk model ,Predictive model,Training,Nov 9 2025,2030,619000,USD
+INIT-014,Energy Copilot,Copilot,Energy,2026-07-21,2750,355000,USD
+INIT-015,Recruitment Virtual Agent,Conversational bot,Recruitment,Jun 28 2026,1560,"$1,880,000",USD
+INIT-016,  order management optimiser ,Predictive model,Order Management,Sep 25 2026,3080,7779000,USD
+INIT-017,  energy virtual agent ,Conversational bot,Energy,2025-05-03,3540,609000,USD
+INIT-018,Facilities Risk Model,Predictive model,Facilities,2026-03-14,2870,"$1,887,000",USD
+INIT-019,  field service virtual agent ,Conversational bot,Field Service,2026-04-28,3800,"$941,000",USD
+INIT-020,Tax Bot,Conversational bot,Tax,Dec 11 2025,3980,"$1,638,000",USD
+INIT-021,  pricing bot ,Conversational bot,Pricing,2026-08-17,1980,2682000,USD
+INIT-022,Inventory Optimiser,Predictive model,Inventory,2025-06-14,3900,505000,USD
+INIT-023,Pricing Risk Model,Predictive model,Pricing,2025-08-30,2420,128000,USD
+INIT-024,Compliance Assistant,Copilot,Compliance,May 10 2025,1900,515000,USD
+INIT-025,  product support optimiser ,Predictive model,Product Support,2026-09-23,810,9181000,USD
+INIT-026,Recruitment Optimiser,Predictive model,Recruitment,13/02/2026,2980,"$430,000",USD
+INIT-027,Audit Copilot,Copilot,Audit,19/12/2025,3120,646000,USD
+INIT-028,Order Management Forecast Model,Predictive model,Order Management,2025-04-08,630,85000,USD
+INIT-029,  claims copilot ,Copilot,Claims,2025-07-12,1620,434000,USD
+INIT-030,Onboarding Bot 30,Conversational bot,Onboarding,2025-11-28,3760,"$215,000",USD
+INIT-031,Energy Forecast Model,Predictive model,Energy,2025-06-14,3200,"$340,000",USD
+INIT-032,Training Assistant,Copilot,Training,Jul 9 2026,3410,992000,USD
+INIT-033,Audit Bot,Conversational bot,Audit,2025-10-27,2010,141000,USD
+INIT-034,Returns Copilot,Copilot,Returns,2025-05-20,1230,769000,USD
+INIT-035,Audit Optimiser,Predictive model,Audit,25/08/2025,1250,"$251,000",USD
+INIT-036,Order Management Bot,Conversational bot,Order Management,2026-02-14,2090,"$488,000",USD
+INIT-037,  claims optimiser ,Predictive model,Claims,2025-03-17,3590,1316000,USD
+INIT-038,  compliance virtual agent ,Conversational bot,Compliance,08/05/2025,1890,473000,USD
+INIT-039,  sourcing virtual agent ,Conversational bot,Sourcing,24/11/2025,1450,508000,USD
+INIT-040,Credit Virtual Agent,Conversational bot,Credit,11/02/2026,350,333000,USD

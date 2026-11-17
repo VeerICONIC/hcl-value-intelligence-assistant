@@ -1,0 +1,163 @@
+[
+  {
+    "id": "DQ-07",
+    "file": "initiatives.csv",
+    "description": "go_live_date uses mixed formats: ISO, DD/MM/YYYY and 'Mon D YYYY'",
+    "expected_correction": "Parse all to ISO dates, day-first for numeric formats (assumption documented)",
+    "affects_metrics": [
+      "months_live",
+      "avg_monthly_benefit",
+      "payback_months",
+      "run_rate_vs_plan"
+    ]
+  },
+  {
+    "id": "DQ-03a",
+    "file": "initiatives.csv",
+    "description": "Numbers stored as text: licensed_users '1,000' (INIT-001), planned_annual_benefit '$600,000' (INIT-005)",
+    "expected_correction": "Strip separators and currency symbols, cast to numbers",
+    "affects_metrics": [
+      "adoption",
+      "run_rate_vs_plan"
+    ]
+  },
+  {
+    "id": "DQ-02a",
+    "file": "initiatives.csv",
+    "description": "Initiative name with stray whitespace and lower case (INIT-007)",
+    "expected_correction": "Trim and restore canonical name from config/initiatives.yaml",
+    "affects_metrics": []
+  },
+  {
+    "id": "DQ-04",
+    "file": "weekly_usage.csv",
+    "description": "Weekly active users reported under different metric names: WAU, weekly_active_users, 'Active Users (weekly)', 'weekly active users'",
+    "expected_correction": "Map all aliases to the canonical metric weekly_active_users",
+    "affects_metrics": [
+      "adoption",
+      "wau_change"
+    ]
+  },
+  {
+    "id": "DQ-02b",
+    "file": "weekly_usage.csv",
+    "description": "INIT-003 appears as 'init_3', 'INIT-003' and ' INIT-3 '",
+    "expected_correction": "Normalise IDs to INIT-NNN",
+    "affects_metrics": [
+      "adoption",
+      "wau_change"
+    ]
+  },
+  {
+    "id": "DQ-07b",
+    "file": "weekly_usage.csv",
+    "description": "week_start for INIT-001 week 2 written as 'Nov 2 2026'",
+    "expected_correction": "Parse to ISO date",
+    "affects_metrics": []
+  },
+  {
+    "id": "DQ-08",
+    "file": "weekly_usage.csv",
+    "description": "INIT-004 first-week WAU recorded as -130",
+    "expected_correction": "Treat as sign typo, correct to 130 (assumption documented)",
+    "affects_metrics": [
+      "wau_change"
+    ]
+  },
+  {
+    "id": "DQ-09",
+    "file": "weekly_usage.csv",
+    "description": "INIT-008 week 2 WAU = 380, above its 150 licensed users",
+    "expected_correction": "Flag as invalid and exclude; no metric uses week 2, so the scorecard is unaffected",
+    "affects_metrics": []
+  },
+  {
+    "id": "DQ-10",
+    "file": "weekly_usage.csv",
+    "description": "INIT-007 has no row for week starting 2026-11-02",
+    "expected_correction": "Flag; WAU change uses first and latest available weeks (assumption A4); scorecard unaffected",
+    "affects_metrics": []
+  },
+  {
+    "id": "DQ-03b",
+    "file": "weekly_usage.csv",
+    "description": "INIT-002 latest-week WAU stored as text '1,625'",
+    "expected_correction": "Strip separator, cast to integer",
+    "affects_metrics": [
+      "adoption",
+      "wau_change"
+    ]
+  },
+  {
+    "id": "DQ-01",
+    "file": "weekly_usage.csv",
+    "description": "Exact duplicate row for INIT-002, week starting 2026-11-02",
+    "expected_correction": "Drop exact duplicates",
+    "affects_metrics": []
+  },
+  {
+    "id": "DQ-04b",
+    "file": "financials.xlsx",
+    "description": "Benefit and cost reported under different measure names (Benefit to date, realised_benefit, value_delivered, Cost to date, total_cost, spend)",
+    "expected_correction": "Map aliases to canonical benefit_to_date / cost_to_date",
+    "affects_metrics": [
+      "roi",
+      "avg_monthly_benefit",
+      "payback_months",
+      "run_rate_vs_plan"
+    ]
+  },
+  {
+    "id": "DQ-05",
+    "file": "financials.xlsx",
+    "description": "INIT-005 benefit reported in thousands (390, unit USD '000)",
+    "expected_correction": "Multiply by 1,000 to USD",
+    "affects_metrics": [
+      "roi",
+      "avg_monthly_benefit",
+      "payback_months",
+      "run_rate_vs_plan",
+      "status"
+    ]
+  },
+  {
+    "id": "DQ-06",
+    "file": "financials.xlsx",
+    "description": "INIT-002 cost reported as 11 monthly rows (basis = monthly) instead of one cumulative figure",
+    "expected_correction": "Sum the 11 monthly rows (Dec 2025 to Oct 2026, all before the as-of date) to get cost_to_date = 220,000",
+    "affects_metrics": [
+      "roi",
+      "payback_months"
+    ]
+  },
+  {
+    "id": "DQ-03c",
+    "file": "financials.xlsx",
+    "description": "INIT-007 benefit stored as text '$97.5k'",
+    "expected_correction": "Parse to 97,500",
+    "affects_metrics": [
+      "roi",
+      "avg_monthly_benefit",
+      "payback_months",
+      "run_rate_vs_plan"
+    ]
+  },
+  {
+    "id": "DQ-02c",
+    "file": "financials.xlsx",
+    "description": "INIT-003 written as ' INIT-3 '",
+    "expected_correction": "Normalise to INIT-003",
+    "affects_metrics": [
+      "roi"
+    ]
+  },
+  {
+    "id": "DQ-11",
+    "file": "financials.xlsx",
+    "description": "A pre-computed reported_roi_pct is supplied, using benefit / cost x 100 instead of the brief's (benefit - cost) / cost",
+    "expected_correction": "Ignore for the scorecard; recompute ROI with the governed formula and log each mismatch",
+    "affects_metrics": [
+      "roi"
+    ]
+  }
+]

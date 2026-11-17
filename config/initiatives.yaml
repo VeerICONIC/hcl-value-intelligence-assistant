@@ -1,0 +1,19 @@
+# Initiative reference data (D10).
+#
+# canonical_names: the approved display name per initiative ID. When the raw name differs
+# (stray spaces, wrong case), the canonical name is restored and the change is logged.
+# Initiatives not listed here still work: their name is trimmed, and an all-lower-case
+# name is title-cased (keeping the acronyms below in capitals). That generic rule is what
+# handles the 32 extra initiatives in data_scale_40/ without any special case.
+canonical_names:
+  INIT-001: HR Policy Copilot
+  INIT-002: IT Helpdesk Bot
+  INIT-003: Sales Forecast Model
+  INIT-004: Contract Review Assistant
+  INIT-005: Customer Service Chatbot
+  INIT-006: Invoice Anomaly Detector
+  INIT-007: Marketing Content Copilot
+  INIT-008: Demand Planning Model
+
+# Words kept in capitals when a lower-case name is title-cased.
+name_acronyms: [AI, HR, IT, ML, KPI, ERP, CRM]

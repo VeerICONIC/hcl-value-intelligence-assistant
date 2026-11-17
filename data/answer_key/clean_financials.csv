@@ -1,0 +1,17 @@
+initiative_id,report_date,measure,value,unit,basis
+INIT-001,2026-11-15,benefit_to_date,300000,USD,cumulative
+INIT-001,2026-11-15,cost_to_date,180000,USD,cumulative
+INIT-002,2026-11-15,benefit_to_date,410000,USD,cumulative
+INIT-002,2026-11-15,cost_to_date,220000,USD,cumulative
+INIT-003,2026-11-15,benefit_to_date,195000,USD,cumulative
+INIT-003,2026-11-15,cost_to_date,150000,USD,cumulative
+INIT-004,2026-11-15,benefit_to_date,140000,USD,cumulative
+INIT-004,2026-11-15,cost_to_date,90000,USD,cumulative
+INIT-005,2026-11-15,benefit_to_date,390000,USD,cumulative
+INIT-005,2026-11-15,cost_to_date,520000,USD,cumulative
+INIT-006,2026-11-15,benefit_to_date,160000,USD,cumulative
+INIT-006,2026-11-15,cost_to_date,160000,USD,cumulative
+INIT-007,2026-11-15,benefit_to_date,97500,USD,cumulative
+INIT-007,2026-11-15,cost_to_date,75000,USD,cumulative
+INIT-008,2026-11-15,benefit_to_date,0,USD,cumulative
+INIT-008,2026-11-15,cost_to_date,210000,USD,cumulative

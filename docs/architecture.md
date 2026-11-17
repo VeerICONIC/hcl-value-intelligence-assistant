@@ -1,6 +1,6 @@
 # Nimbus Value Intelligence Assistant: Architecture and Decisions
 
-Use case 2b of the HCLTech Future Ready AI Engineer Hackathon. The brief is `docs/problem_statement.md`; this file records **how** we build it and **why**. Treat both as the source of truth. Changing a decision or contract below needs the team's agreement and a note in `docs/PROGRESS.md`.
+Use case 2b of the HCLTech Future Ready AI Engineer Hackathon. The brief is `docs/problem_statement.md`; this file records **how** we build it and **why**. Treat both as the source of truth. One developer builds the whole project end to end with an AI coding assistant. Changing a decision or contract below needs the developer's approval and a note in `docs/PROGRESS.md`.
 
 ## 1. What we are building
 
@@ -12,7 +12,8 @@ A system that turns messy portfolio spreadsheets and initiative charters into:
 4. an assistant that **routes** questions to the scorecard, the charters or both, and answers with a source for every statement (FR-05, FR-06);
 5. the exact fallback **"I do not have that in the data provided"** when evidence is missing (FR-07);
 6. **guardrails**: no invented numbers, charter instructions ignored, unavailable personal data refused (FR-08);
-7. a **weekly executive report** (FR-09) and a **small Streamlit UI** (FR-10).
+7. a **weekly executive report** (FR-09);
+8. **one Streamlit dashboard** (FR-10): analytics and metrics are computed and shown first, and the assistant chat lives on the same page, answering from the same scorecard the user is looking at (section 3.3).
 
 Design principle from the brief: **code for numbers, retrieval for charter evidence, the LLM only for grounded explanation.**
 
@@ -20,7 +21,7 @@ Design principle from the brief: **code for numbers, retrieval for charter evide
 
 | # | Decision | Why |
 |---|---|---|
-| D1 | Python 3.12, FastAPI, Streamlit, pandas, pytest | Team familiarity; simple to demo |
+| D1 | Python 3.12, FastAPI, Streamlit, pandas, pytest | Familiar stack; simple to demo |
 | D2 | Amazon Bedrock via **boto3 directly**: Titan Text Embeddings V2 (`amazon.titan-embed-text-v2:0`, 1024 dims) and Nova Lite via the **Converse API**. Region `ap-south-1`, LLM ID `apac.amazon.nova-lite-v1:0` (inference profile), both from `.env` | Verified working in our practice project |
 | D3 | ChromaDB persistent, cosine space; collection name encodes model + dims | Local, no server, metadata filters |
 | D4 | **No LangChain, no LangGraph.** Orchestration is one explicit Python function | The flow is linear with one branch and one retry; plain code is easier to debug and defend |
@@ -31,6 +32,8 @@ Design principle from the brief: **code for numbers, retrieval for charter evide
 | D9 | Router is **rules first** (metric keywords, status words, initiative aliases); an LLM with structured output only for ambiguous questions | Deterministic, testable, cheap |
 | D10 | Loading is **config-driven** (`config/metric_dictionary.yaml`, `config/initiatives.yaml`) | The real data arrives on hackathon day; adapting should mean editing YAML, not code |
 | D11 | Credentials only through the boto3 default chain. Never hardcode, never commit `.env` | Security |
+| D12 | **Analytics first, chat second, one page.** The dashboard runs the pipeline and shows the scorecard before any LLM is involved; the chat panel below it answers from that same scorecard version | The numbers on screen and the numbers in answers can never disagree; the analytics work even if Bedrock is down |
+| D13 | Streamlit talks only to FastAPI; FastAPI owns all logic | Clean separation; the API is testable and demoable on its own |
 
 ## 3. Data flows
 
@@ -72,6 +75,20 @@ def answer_question(question: str) -> AnswerResponse:
             return render(draft, facts, chunks, report, trace)
     return template_answer(facts, chunks, trace)    # deterministic safe fallback
 ```
+
+### 3.3 The dashboard (one Streamlit page, top to bottom)
+
+| Order | Section | Contents | Backend |
+|---|---|---|---|
+| 0 | Sidebar | Data source (practice data or uploaded files), **Run pipeline** button, data version hash, as-of date, Bedrock status | `POST /pipeline/run`, `GET /health` |
+| 1 | Portfolio overview | KPI tiles: number of initiatives, Green / Amber / Red counts (counts only; no undefined aggregates) | `GET /scorecard` |
+| 2 | Scorecard table | One row per initiative: all 7 metrics + status chip; click a row to see each metric's formula, inputs and source rows | `GET /scorecard` |
+| 3 | Charts | Adoption by initiative with 30% and 60% threshold lines; ROI by initiative as bars around zero; WAU over the three weeks per initiative | `GET /scorecard`, `GET /usage` |
+| 4 | Data quality | Change log table (rule, file, row, old value, new value, reason, effect); planted issues found | `GET /data-quality` |
+| 5 | **Ask the assistant** | Chat box under the analytics. Each answer shows its route (metric / narrative / mixed), the scorecard cells it used (linked to the table above) and charter citations with excerpts. Header shows the data version it answered from | `POST /ask` |
+| 6 | Weekly report | **Generate report** button, preview, download as Markdown/HTML | `POST /report/weekly` |
+
+Rules: sections 1–4 never call the LLM. The chat is disabled until the pipeline has run. Every answer carries the data version so it matches the table on screen.
 
 ## 4. Metrics (our own words, FR-01)
 
@@ -152,21 +169,21 @@ hcl-value-intelligence-assistant/
   data/          raw/  charters/  processed/  answer_key/
   app/
     main.py      core/ (config, logging, exceptions, bedrock)
-    api/routes/  ask.py  scorecard.py  report.py  data_quality.py  health.py
+    api/routes/  pipeline.py  scorecard.py  data_quality.py  ask.py  report.py  health.py
     schemas/     data.py  scorecard.py  retrieval.py  answer.py
     data/        loader.py  cleaning.py  normalize.py  changelog.py
     scorecard/   metrics.py  status.py  engine.py  query.py
     charters/    parsers/  chunker.py  injection.py  embeddings.py  store.py  retriever.py
     orchestration/ answer.py  router.py  guards.py  render.py  fallback.py
     generation/  llm.py  composer.py  prompts.py  report_writer.py
-  ui/            streamlit_app.py
+  ui/            dashboard.py  components/ (overview, scorecard_table, charts, data_quality, chat, report)
   eval/          questions.yaml  run_eval.py  results/
   scripts/       generate_practice_data.py  build_scorecard.py  build_index.py  test_bedrock.py
   tests/
   docs/          problem_statement.md  architecture.md  assumptions.md  PROGRESS.md
 ```
 
-## 8. Files reused from the practice repo (copy, then trim imports)
+## 8. Optional reuse from the practice repo (copy, then trim imports)
 
 From `hcl-enterprise-rag-assistant` (Doc Q&A, verified against live Bedrock):
 
@@ -179,80 +196,110 @@ From `hcl-enterprise-rag-assistant` (Doc Q&A, verified against live Bedrock):
 | `app/retrieval/bm25_retriever.py`, RRF from `hybrid_ranker.py` | `app/charters/retriever.py` |
 | `scripts/test_bedrock.py` | `scripts/` |
 
-Everything else is written fresh. Do **not** copy conflict detection, version filters or the Doc Q&A corpus.
+If the practice repo is not available, write these fresh. Everything else is written fresh. Do **not** copy conflict detection, version filters or the Doc Q&A corpus.
 
 ## 9. Practice dataset (we do not have the real data yet)
 
-The real files arrive on hackathon day. Until then we practise on a **synthetic dataset generated by a seeded script** (`scripts/generate_practice_data.py`). It must be reproducible and come with an answer key.
+The real files arrive on hackathon day. Until then we use a **synthetic, seeded dataset** that is already in the repo.
+**`data/README.md` and `data/answer_key/planted_issues.json` are the source of truth for the data**; this section summarises them.
 
-### 9.1 How the generator works
+### 9.1 What is in the repo
 
-1. Define the **clean truth** for each initiative in code (users, costs, benefits, dates).
-2. Compute the **expected scorecard** from the clean truth with a small, independent formula implementation inside the generator (it must not import `app/scorecard/`; it is the test oracle).
-3. Write the **raw files** by injecting the planted issues into the clean truth.
-4. Write the **answer key**: `data/answer_key/expected_scorecard.csv`, `clean_truth.csv`, `planted_issues.json` (id, file, rows, description, expected correction).
-5. Write the **charters**.
+| Folder | Contents |
+|---|---|
+| `data/` | Curated demo set: **8 initiatives** (`raw/`, `charters/`, `answer_key/`, `README.md`) |
+| `data_scale_40/` | Scale set: the same 8 curated initiatives + 32 random ones (`INIT-009`..`INIT-040`), same layout, its own answer key |
+| `scripts/generate_practice_data.py` | Seeded generator (`--size N`, `--out DIR`). Computes the expected scorecard with its own independent formula code (the test oracle). Needs `fpdf2` for PDF charters |
+| `scripts/verify_practice_data.py` | Throwaway reference cleaner proving each folder's raw files clean back to its answer key. **Not** the application pipeline |
 
-The core test then becomes: `clean(raw files) -> scorecard` must equal `expected_scorecard.csv`, and every planted issue must appear in the change log.
+Answer key (`answer_key/`): `clean_initiatives.csv`, `clean_weekly_usage.csv`, `clean_financials.csv` (the clean truth),
+`expected_scorecard.csv` (all metrics + status), `planted_issues.json` (id, file, description, expected correction, affected metrics),
+`charter_catalogue.json` (file, format, sections, notes). Note: the clean usage file holds the *true* values, including rows that are
+invalid (DQ-09) or missing (DQ-10) in the raw files, so the pipeline is judged on the scorecard and the change log, not on that file.
 
-### 9.2 Files
+**Done criterion for the pipeline:** cleaning `raw/` reproduces `answer_key/expected_scorecard.csv`, every planted issue appears in the
+change log, and the same code passes on `data_scale_40/`.
+
+### 9.2 Raw files
 
 | File | Columns (canonical) | Notes |
 |---|---|---|
-| `initiatives.csv` | initiative_id, name, type, business_unit, go_live_date, licensed_users, planned_annual_benefit, currency | one row per initiative |
-| `weekly_usage.csv` | initiative_id, week_start, metric_name, value | long format, 3 weeks per initiative, metric names vary by initiative |
-| `financials.xlsx` | initiative_id, report_date, measure, value, unit, basis | measures: benefit / cost under varying names; basis: cumulative or monthly |
+| `initiatives.csv` | initiative_id, name, type, business_unit, go_live_date, licensed_users, planned_annual_benefit, currency | One row per initiative; currency is always USD |
+| `weekly_usage.csv` | initiative_id, week_start, metric_name, value | Long format; weeks starting 2026-10-26, 2026-11-02, 2026-11-09; WAU under several metric names |
+| `financials.xlsx` (sheet `financials`) | initiative_id, report_date, measure, value, unit, basis | Benefit and cost under several measure names; basis `cumulative` or `monthly`; units `USD`, `USD '000`, `%`; also a supplied `reported_roi_pct` |
 
-### 9.3 Initiatives (8), each chosen to exercise a rule
+Data rules (also in `data/README.md` and section 11):
+- **As-of date** 2026-11-15 = end of the latest usage week. Months live = days from go-live to as-of / 30.44 (A1).
+- **Dates:** parse ISO `YYYY-MM-DD` first; other numeric dates are day-first (`07/09/2026` = 7 Sep 2026); text dates like `Nov 2 2026` also occur. ISO must be handled first because `dateutil` with `dayfirst=True` misreads `2025-09-01` as 9 January.
+- **Money:** all USD; `USD '000` means multiply by 1,000. No currency conversion.
+- **Monthly cost rows** are summed up to the as-of date to give cost to date.
+- **WAU above licensed users:** flag the row, exclude it, log it. If that ever hits the first or latest week, the affected metric is `None` with a reason; never guess.
+- **Supplied `reported_roi_pct`** is not used; ROI is recomputed with the governed formula and each mismatch is logged.
 
-| ID | Name | Target outcome |
-|---|---|---|
-| INIT-001 | HR Policy Copilot | Green (adoption ~72%, ROI positive) |
-| INIT-002 | IT Helpdesk Bot | Green |
-| INIT-003 | Sales Forecast Model | Amber (adoption ~45%, ROI positive) |
-| INIT-004 | Contract Review Assistant | Red via low adoption (~22%) despite positive ROI |
-| INIT-005 | Customer Service Chatbot | Red via negative ROI despite adoption ~68% |
-| INIT-006 | Invoice Anomaly Detector | Amber with ROI exactly 0 (boundary) |
-| INIT-007 | Marketing Content Copilot | Amber (adoption ~55%, ROI positive) |
-| INIT-008 | Demand Planning Model | Red, zero benefit to date -> payback undefined |
+### 9.3 Initiatives in the demo set (8)
 
-### 9.4 Planted data-quality issues (each must be detected and logged)
+| ID | Name | Charter | Expected outcome |
+|---|---|---|---|
+| INIT-001 | HR Policy Copilot | md | Green (adoption 72%, ROI +0.67) |
+| INIT-002 | IT Helpdesk Bot | md | Green (adoption 65%, ROI +0.86) |
+| INIT-003 | Sales Forecast Model | pdf | Amber (adoption 45%, ROI +0.30); **charter has no Risks section** |
+| INIT-004 | Contract Review Assistant | md | Red via low adoption (22%) despite ROI +0.56 |
+| INIT-005 | Customer Service Chatbot | md | Red via negative ROI (-0.25) despite adoption 68%; **charter contains a planted prompt injection** |
+| INIT-006 | Invoice Anomaly Detector | docx | Amber at the boundary: ROI exactly 0 with adoption 63% |
+| INIT-007 | Marketing Content Copilot | md | Amber (adoption 55%, ROI +0.30) |
+| INIT-008 | Demand Planning Model | pdf | Red: zero benefit to date, ROI -1, payback undefined |
 
-| ID | Issue |
-|---|---|
-| DQ-01 | Exact duplicate row in `weekly_usage.csv` |
-| DQ-02 | Initiative ID formats differ (`INIT-003`, `init_3`, ` INIT-3 `) |
-| DQ-03 | Numbers stored as text (`"1,250"`, `"$45k"`, `"12.5 lakh"`) |
-| DQ-04 | Metric name aliases for WAU (`WAU`, `weekly_active_users`, `Active Users (weekly)`) |
-| DQ-05 | One initiative reports benefit in thousands (`USD '000`) |
-| DQ-06 | One initiative reports cost monthly instead of cumulative (must be summed) |
-| DQ-07 | Mixed date formats (`2026-09-07`, `07/09/2026`, `Sep 7 2026`) |
-| DQ-08 | Negative user count typo (`-450`) |
-| DQ-09 | WAU greater than licensed users for one week (impossible; flag and apply documented rule) |
-| DQ-10 | One initiative missing a week of usage (flag; documented assumption for WAU change) |
+The exact values are in `data/answer_key/expected_scorecard.csv`; this table is a guide only.
+
+### 9.4 Planted data-quality issues (demo set)
+
+| ID | File | Issue | Expected correction |
+|---|---|---|---|
+| DQ-01 | weekly_usage.csv | Exact duplicate row (INIT-002, week 2026-11-02) | Drop exact duplicates |
+| DQ-02a | initiatives.csv | Name with stray whitespace and lower case (INIT-007) | Trim and restore the canonical name |
+| DQ-02b | weekly_usage.csv | INIT-003 as `init_3`, `INIT-003`, ` INIT-3 ` | Normalise IDs to `INIT-NNN` |
+| DQ-02c | financials.xlsx | INIT-003 as ` INIT-3 ` | Normalise to `INIT-003` |
+| DQ-03a | initiatives.csv | Numbers as text: `"1,000"` (INIT-001 licensed users), `"$600,000"` (INIT-005 planned benefit) | Strip separators/symbols, cast |
+| DQ-03b | weekly_usage.csv | INIT-002 latest-week WAU as text `"1,625"` | Cast to integer |
+| DQ-03c | financials.xlsx | INIT-007 benefit as text `"$97.5k"` | Parse to 97,500 |
+| DQ-04 | weekly_usage.csv | WAU as `WAU`, `weekly_active_users`, `Active Users (weekly)`, `weekly active users` | Map to `weekly_active_users` |
+| DQ-04b | financials.xlsx | Benefit/cost as `Benefit to date`, `realised_benefit`, `value_delivered`, `Cost to date`, `total_cost`, `spend` | Map to `benefit_to_date` / `cost_to_date` |
+| DQ-05 | financials.xlsx | INIT-005 benefit in thousands (390, unit `USD '000`) | Multiply by 1,000 |
+| DQ-06 | financials.xlsx | INIT-002 cost as 11 monthly rows | Sum to cost to date (220,000) |
+| DQ-07 | initiatives.csv | go_live_date in ISO, `DD/MM/YYYY` and `Mon D YYYY` | Parse to ISO, day-first for numeric |
+| DQ-07b | weekly_usage.csv | INIT-001 week 2 as `Nov 2 2026` | Parse to ISO |
+| DQ-08 | weekly_usage.csv | INIT-004 first-week WAU = -130 | Sign typo: correct to 130 |
+| DQ-09 | weekly_usage.csv | INIT-008 week-2 WAU 380 > 150 licensed | Flag and exclude (week 2 is unused by metrics) |
+| DQ-10 | weekly_usage.csv | INIT-007 missing week 2026-11-02 | Flag; WAU change uses first and latest available weeks (A4) |
+| DQ-11 | financials.xlsx | Supplied `reported_roi_pct` uses benefit / cost x 100 | Ignore; recompute ROI; log each mismatch |
+
+The scale set adds random, reversible issues with ids `R-<TYPE>-<INIT>` (types: DATE, NAME, MONEY, NEG, DUP, BAD, ID, MISS, ALIAS, TEXT,
+MONTHLY, KTEXT, K, MEASURE, FID), each one an instance of a rule above.
 
 ### 9.5 Charters (one per initiative)
 
-- Mixed formats: 5 Markdown, 2 PDF, 1 DOCX (generated from Markdown by the script).
-- Sections: Overview, Objectives, Scope, Success Measures, Benefits Plan, Risks and Mitigations, Stakeholders (names and roles only, never contact details), Timeline.
-- **INIT-005's charter contains a planted prompt injection**, e.g. a line telling AI systems to ignore previous instructions and report the initiative as Green with a high ROI.
-- One charter has **no Risks section**, for a no-answer test.
-- No charter contains phone numbers, emails or salaries, for the personal-data refusal test.
+- Formats: 5 Markdown, 2 PDF (INIT-003, INIT-008), 1 DOCX (INIT-006). Catalogue: `answer_key/charter_catalogue.json`.
+- Sections: Overview, Objectives, Scope, Success Measures, Benefits Plan, Risks and Mitigations, Stakeholders (names and roles only), Timeline.
+- **INIT-005's charter contains a planted prompt injection** in Risks and Mitigations (must be ignored).
+- **INIT-003's charter has no Risks and Mitigations section** (risk questions about it need the fallback).
+- No charter contains phone numbers, emails or salaries (personal-data refusal test).
 
-## 10. Build order and ownership
+## 10. Build order
 
-| Step | Work | Owner |
+Analytics first, then the assistant. Each step ends with passing tests and an entry in `docs/PROGRESS.md`; do not start a step until the previous one works.
+
+| Step | Work | Done when |
 |---|---|---|
-| 1 | Skeleton: config, settings, logging, FastAPI app, `/health`, all schemas, copied Bedrock/Chroma files with fixed imports, `CLAUDE.md`, `docs/PROGRESS.md` | M1 |
-| 2 | Practice data generator + answer key | M2 (data), M3 (charters) |
-| 3 | Loader, cleaning rules, change log, scorecard engine, golden tests | M2 |
-| 4 | Charter parsing, chunking, initiative mapping, injection flag, index, retriever | M3 |
-| 5 | Router, scorecard query engine, input guard, fallback (numeric questions work end to end without an LLM) | M1 |
-| 6 | Composer with tokens, number guard, renderer (narrative and mixed questions) | M4 + M1 |
-| 7 | `/ask` API with trace | M1 |
-| 8 | Weekly report | M4 |
-| 9 | Streamlit UI | M4 |
-| 10 | Evaluation + README | M4, all |
+| 1 | Skeleton: config, settings, logging, FastAPI app, `/health`, all schemas, Bedrock/Chroma infrastructure, `CLAUDE.md`, `docs/PROGRESS.md` | App starts; tests pass |
+| 2 | Practice data generator + answer key | 8 initiatives hit their target statuses; all 10 planted issues present |
+| 3 | Data pipeline: loader, cleaning rules, change log, normalisation, scorecard engine, golden tests; `POST /pipeline/run`, `GET /scorecard`, `GET /data-quality`, `GET /usage` | `clean(raw)` scorecard equals the answer key; every DQ issue in the change log |
+| 4 | **Dashboard v1 (no LLM):** sidebar, overview tiles, scorecard table with drill-down, charts, data-quality log | Full analytics demo runs from the browser |
+| 5 | Charter parsing, chunking, initiative mapping, injection flag, index, retriever | Charter questions retrieve the right sections; injection chunk flagged |
+| 6 | Router, scorecard query engine, input guard, fallback | Numeric questions answered end to end **without any LLM** |
+| 7 | Composer with tokens, number guard, renderer; `POST /ask` with trace | Narrative and mixed questions answered with citations; no raw digits ever |
+| 8 | **Dashboard v2:** Ask panel on the same page, sources linked to the scorecard table | Chat works below the analytics using the same data version |
+| 9 | Weekly report endpoint + dashboard section | Every figure footnoted to a scorecard cell; downloadable |
+| 10 | Evaluation (question set, metrics, results), README, assumptions log, guardrail demo script | All expected submissions present |
 
 ## 11. Assumptions and client clarification candidates (FR-01)
 
@@ -260,4 +307,4 @@ The core test then becomes: `clean(raw files) -> scorecard` must equal `expected
 - **A2 Undefined aggregates:** portfolio-level averages or totals are not defined metrics, so they are not computed.
 - **A3 Charter figures:** numbers inside charters are not displayed by the assistant (FR-08); charter excerpts are shown as source evidence only.
 - **A4 Missing week:** WAU change uses the first and latest available weeks; flagged in the change log.
-- **A5 Currency:** all money normalised to one currency per config; conversion rates documented.
+- **A5 Currency:** all money is USD; `USD '000` means thousands. No currency conversion is needed for the supplied data (configurable if the real data differs).
