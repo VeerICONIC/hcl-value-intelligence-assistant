@@ -1,0 +1,197 @@
+rule,file,row,initiative_id,column,old,new,reason,affects,effect
+NUMBER_TEXT,initiatives.csv,2.0,INIT-001,licensed_users,"1,000",1000,Number stored as text,['adoption'],Feeds adoption 72.0%
+DATE_FORMAT,initiatives.csv,3.0,INIT-002,go_live_date,15/12/2025,2025-12-15,"Parsed non-ISO date (ISO first, then day-first)","['months_live', 'avg_monthly_benefit', 'payback_months', 'run_rate_vs_plan']","Feeds months live 11.0, avg monthly benefit $37,255, payback months 5.9 months, run rate vs plan 106.4%"
+DATE_FORMAT,initiatives.csv,4.0,INIT-003,go_live_date,Jan 10 2026,2026-01-10,"Parsed non-ISO date (ISO first, then day-first)","['months_live', 'avg_monthly_benefit', 'payback_months', 'run_rate_vs_plan']","Feeds months live 10.2, avg monthly benefit $19,210, payback months 7.8 months, run rate vs plan 76.8%"
+NUMBER_TEXT,initiatives.csv,6.0,INIT-005,planned_annual_benefit,"$600,000",600000,Number stored as text,['run_rate_vs_plan'],Feeds run rate vs plan 54.0%
+DATE_FORMAT,initiatives.csv,7.0,INIT-006,go_live_date,16/03/2026,2026-03-16,"Parsed non-ISO date (ISO first, then day-first)","['months_live', 'avg_monthly_benefit', 'payback_months', 'run_rate_vs_plan']","Feeds months live 8.0, avg monthly benefit $19,961, payback months 8.0 months, run rate vs plan 95.8%"
+NAME_FORMAT,initiatives.csv,8.0,INIT-007,name,  marketing content copilot ,Marketing Content Copilot,Trimmed / restored canonical name,[],No metric affected
+DATE_FORMAT,initiatives.csv,10.0,INIT-009,go_live_date,14/03/2026,2026-03-14,"Parsed non-ISO date (ISO first, then day-first)","['months_live', 'avg_monthly_benefit', 'payback_months', 'run_rate_vs_plan']","Feeds months live 8.1, avg monthly benefit $57,885, payback months 4.5 months, run rate vs plan 96.2%"
+NAME_FORMAT,initiatives.csv,11.0,INIT-010,name,  quality assistant ,Quality Assistant,Trimmed / restored canonical name,[],No metric affected
+NAME_FORMAT,initiatives.csv,12.0,INIT-011,name,  onboarding bot ,Onboarding Bot,Trimmed / restored canonical name,[],No metric affected
+NAME_FORMAT,initiatives.csv,14.0,INIT-013,name,  training risk model ,Training Risk Model,Trimmed / restored canonical name,[],No metric affected
+DATE_FORMAT,initiatives.csv,14.0,INIT-013,go_live_date,Nov 9 2025,2025-11-09,"Parsed non-ISO date (ISO first, then day-first)","['months_live', 'avg_monthly_benefit', 'payback_months', 'run_rate_vs_plan']","Feeds months live 12.2, avg monthly benefit $49,024, payback months 5.4 months, run rate vs plan 95.0%"
+DATE_FORMAT,initiatives.csv,16.0,INIT-015,go_live_date,Jun 28 2026,2026-06-28,"Parsed non-ISO date (ISO first, then day-first)","['months_live', 'avg_monthly_benefit', 'payback_months', 'run_rate_vs_plan']","Feeds months live 4.6, avg monthly benefit $149,221, payback months 2.1 months, run rate vs plan 95.2%"
+NUMBER_TEXT,initiatives.csv,16.0,INIT-015,planned_annual_benefit,"$1,880,000",1.88e+06,Number stored as text,['run_rate_vs_plan'],Feeds run rate vs plan 95.2%
+NAME_FORMAT,initiatives.csv,17.0,INIT-016,name,  order management optimiser ,Order Management Optimiser,Trimmed / restored canonical name,[],No metric affected
+DATE_FORMAT,initiatives.csv,17.0,INIT-016,go_live_date,Sep 25 2026,2026-09-25,"Parsed non-ISO date (ISO first, then day-first)","['months_live', 'avg_monthly_benefit', 'payback_months', 'run_rate_vs_plan']","Feeds months live 1.7, avg monthly benefit $439,530, payback months 1.2 months, run rate vs plan 67.8%"
+NAME_FORMAT,initiatives.csv,18.0,INIT-017,name,  energy virtual agent ,Energy Virtual Agent,Trimmed / restored canonical name,[],No metric affected
+NUMBER_TEXT,initiatives.csv,19.0,INIT-018,planned_annual_benefit,"$1,887,000",1.887e+06,Number stored as text,['run_rate_vs_plan'],Feeds run rate vs plan 89.4%
+NAME_FORMAT,initiatives.csv,20.0,INIT-019,name,  field service virtual agent ,Field Service Virtual Agent,Trimmed / restored canonical name,[],No metric affected
+NUMBER_TEXT,initiatives.csv,20.0,INIT-019,planned_annual_benefit,"$941,000",941000,Number stored as text,['run_rate_vs_plan'],Feeds run rate vs plan 118.4%
+DATE_FORMAT,initiatives.csv,21.0,INIT-020,go_live_date,Dec 11 2025,2025-12-11,"Parsed non-ISO date (ISO first, then day-first)","['months_live', 'avg_monthly_benefit', 'payback_months', 'run_rate_vs_plan']","Feeds months live 11.1, avg monthly benefit $92,326, payback months 6.1 months, run rate vs plan 67.6%"
+NUMBER_TEXT,initiatives.csv,21.0,INIT-020,planned_annual_benefit,"$1,638,000",1.638e+06,Number stored as text,['run_rate_vs_plan'],Feeds run rate vs plan 67.6%
+NAME_FORMAT,initiatives.csv,22.0,INIT-021,name,  pricing bot ,Pricing Bot,Trimmed / restored canonical name,[],No metric affected
+DATE_FORMAT,initiatives.csv,25.0,INIT-024,go_live_date,May 10 2025,2025-05-10,"Parsed non-ISO date (ISO first, then day-first)","['months_live', 'avg_monthly_benefit', 'payback_months', 'run_rate_vs_plan']","Feeds months live 18.2, avg monthly benefit $28,198, payback months 17.2 months, run rate vs plan 65.7%"
+NAME_FORMAT,initiatives.csv,26.0,INIT-025,name,  product support optimiser ,Product Support Optimiser,Trimmed / restored canonical name,[],No metric affected
+DATE_FORMAT,initiatives.csv,27.0,INIT-026,go_live_date,13/02/2026,2026-02-13,"Parsed non-ISO date (ISO first, then day-first)","['months_live', 'avg_monthly_benefit', 'payback_months', 'run_rate_vs_plan']","Feeds months live 9.0, avg monthly benefit $25,658, payback months 11.9 months, run rate vs plan 71.6%"
+NUMBER_TEXT,initiatives.csv,27.0,INIT-026,planned_annual_benefit,"$430,000",430000,Number stored as text,['run_rate_vs_plan'],Feeds run rate vs plan 71.6%
+DATE_FORMAT,initiatives.csv,28.0,INIT-027,go_live_date,19/12/2025,2025-12-19,"Parsed non-ISO date (ISO first, then day-first)","['months_live', 'avg_monthly_benefit', 'payback_months', 'run_rate_vs_plan']","Feeds months live 10.9, avg monthly benefit $36,510, payback months 9.2 months, run rate vs plan 67.8%"
+NAME_FORMAT,initiatives.csv,30.0,INIT-029,name,  claims copilot ,Claims Copilot,Trimmed / restored canonical name,[],No metric affected
+NUMBER_TEXT,initiatives.csv,31.0,INIT-030,planned_annual_benefit,"$215,000",215000,Number stored as text,['run_rate_vs_plan'],Feeds run rate vs plan 111.4%
+NUMBER_TEXT,initiatives.csv,32.0,INIT-031,planned_annual_benefit,"$340,000",340000,Number stored as text,['run_rate_vs_plan'],Feeds run rate vs plan 67.9%
+DATE_FORMAT,initiatives.csv,33.0,INIT-032,go_live_date,Jul 9 2026,2026-07-09,"Parsed non-ISO date (ISO first, then day-first)","['months_live', 'avg_monthly_benefit', 'payback_months', 'run_rate_vs_plan']","Feeds months live 4.2, avg monthly benefit $0, run rate vs plan 0.0%"
+DATE_FORMAT,initiatives.csv,36.0,INIT-035,go_live_date,25/08/2025,2025-08-25,"Parsed non-ISO date (ISO first, then day-first)","['months_live', 'avg_monthly_benefit', 'payback_months', 'run_rate_vs_plan']","Feeds months live 14.7, avg monthly benefit $21,049, payback months 20.2 months, run rate vs plan 100.6%"
+NUMBER_TEXT,initiatives.csv,36.0,INIT-035,planned_annual_benefit,"$251,000",251000,Number stored as text,['run_rate_vs_plan'],Feeds run rate vs plan 100.6%
+NUMBER_TEXT,initiatives.csv,37.0,INIT-036,planned_annual_benefit,"$488,000",488000,Number stored as text,['run_rate_vs_plan'],Feeds run rate vs plan 64.5%
+NAME_FORMAT,initiatives.csv,38.0,INIT-037,name,  claims optimiser ,Claims Optimiser,Trimmed / restored canonical name,[],No metric affected
+NAME_FORMAT,initiatives.csv,39.0,INIT-038,name,  compliance virtual agent ,Compliance Virtual Agent,Trimmed / restored canonical name,[],No metric affected
+DATE_FORMAT,initiatives.csv,39.0,INIT-038,go_live_date,08/05/2025,2025-05-08,"Parsed non-ISO date (ISO first, then day-first)","['months_live', 'avg_monthly_benefit', 'payback_months', 'run_rate_vs_plan']","Feeds months live 18.3, avg monthly benefit $35,274, payback months 9.8 months, run rate vs plan 89.5%"
+NAME_FORMAT,initiatives.csv,40.0,INIT-039,name,  sourcing virtual agent ,Sourcing Virtual Agent,Trimmed / restored canonical name,[],No metric affected
+DATE_FORMAT,initiatives.csv,40.0,INIT-039,go_live_date,24/11/2025,2025-11-24,"Parsed non-ISO date (ISO first, then day-first)","['months_live', 'avg_monthly_benefit', 'payback_months', 'run_rate_vs_plan']","Feeds months live 11.7, avg monthly benefit $32,689, payback months 15.0 months, run rate vs plan 77.2%"
+DATE_FORMAT,initiatives.csv,41.0,INIT-040,go_live_date,11/02/2026,2026-02-11,"Parsed non-ISO date (ISO first, then day-first)","['months_live', 'avg_monthly_benefit', 'payback_months', 'run_rate_vs_plan']","Feeds months live 9.1, avg monthly benefit $33,264, payback months 16.1 months, run rate vs plan 119.9%"
+DUPLICATE_ROW,weekly_usage.csv,27.0,INIT-010,,,,Exact duplicate row dropped,[],No metric affected
+DUPLICATE_ROW,weekly_usage.csv,80.0,INIT-002,,,,Exact duplicate row dropped,[],No metric affected
+DUPLICATE_ROW,weekly_usage.csv,104.0,INIT-039,,,,Exact duplicate row dropped,[],No metric affected
+DUPLICATE_ROW,weekly_usage.csv,106.0,INIT-014,,,,Exact duplicate row dropped,[],No metric affected
+DUPLICATE_ROW,weekly_usage.csv,110.0,INIT-032,,,,Exact duplicate row dropped,[],No metric affected
+DUPLICATE_ROW,weekly_usage.csv,120.0,INIT-022,,,,Exact duplicate row dropped,[],No metric affected
+NUMBER_TEXT,weekly_usage.csv,3.0,INIT-035,value,"1,032",1032,Number stored as text,"['adoption', 'wau_change']","Feeds adoption 78.4%, wau change -5.0%"
+METRIC_ALIAS,weekly_usage.csv,5.0,INIT-027,metric_name,Active Users (weekly),weekly_active_users,Metric alias mapped,"['adoption', 'wau_change']","Feeds adoption 70.1%, wau change -12.0%"
+NUMBER_TEXT,weekly_usage.csv,5.0,INIT-027,value,"2,437",2437,Number stored as text,"['adoption', 'wau_change']","Feeds adoption 70.1%, wau change -12.0%"
+METRIC_ALIAS,weekly_usage.csv,8.0,INIT-002,metric_name,WAU,weekly_active_users,Metric alias mapped,"['adoption', 'wau_change']","Feeds adoption 65.0%, wau change -4.4%"
+NUMBER_TEXT,weekly_usage.csv,8.0,INIT-002,value,"1,625",1625,Number stored as text,"['adoption', 'wau_change']","Feeds adoption 65.0%, wau change -4.4%"
+ID_FORMAT,weekly_usage.csv,9.0,INIT-021,initiative_id,init_21,INIT-021,Normalised initiative ID,"['adoption', 'wau_change']","Feeds adoption 78.2%, wau change +7.5%"
+METRIC_ALIAS,weekly_usage.csv,12.0,INIT-022,metric_name,WAU,weekly_active_users,Metric alias mapped,"['adoption', 'wau_change']","Feeds adoption 18.0%, wau change +17.8%"
+METRIC_ALIAS,weekly_usage.csv,15.0,INIT-005,metric_name,weekly active users,weekly_active_users,Metric alias mapped,"['adoption', 'wau_change']","Feeds adoption 68.0%, wau change +7.4%"
+METRIC_ALIAS,weekly_usage.csv,17.0,INIT-008,metric_name,WAU,weekly_active_users,Metric alias mapped,"['adoption', 'wau_change']","Feeds adoption 24.0%, wau change -10.0%"
+METRIC_ALIAS,weekly_usage.csv,18.0,INIT-028,metric_name,WAU,weekly_active_users,Metric alias mapped,"['adoption', 'wau_change']","Feeds adoption 18.4%, wau change -14.1%"
+NEGATIVE_VALUE,weekly_usage.csv,18.0,INIT-028,value,-130,130,Negative user count treated as a sign typo,"['adoption', 'wau_change']","Feeds adoption 18.4%, wau change -14.1%"
+NEGATIVE_VALUE,weekly_usage.csv,19.0,INIT-037,value,-951,951,Negative user count treated as a sign typo,"['adoption', 'wau_change']","Feeds adoption 26.7%, wau change +7.2%"
+NEGATIVE_VALUE,weekly_usage.csv,20.0,INIT-015,value,-841,841,Negative user count treated as a sign typo,"['adoption', 'wau_change']","Feeds adoption 51.3%, wau change -5.8%"
+WAU_ABOVE_LICENSED,weekly_usage.csv,21.0,INIT-018,value,5740,,Active users exceed 2870 licensed users; row excluded,[],No metric affected
+NUMBER_TEXT,weekly_usage.csv,25.0,INIT-016,value,"1,349",1349,Number stored as text,"['adoption', 'wau_change']","Feeds adoption 43.8%, wau change -4.1%"
+ID_FORMAT,weekly_usage.csv,29.0,INIT-039,initiative_id,init_39,INIT-039,Normalised initiative ID,"['adoption', 'wau_change']","Feeds adoption 78.8%, wau change +0.1%"
+METRIC_ALIAS,weekly_usage.csv,42.0,INIT-001,metric_name,WAU,weekly_active_users,Metric alias mapped,"['adoption', 'wau_change']","Feeds adoption 72.0%, wau change +12.5%"
+ID_FORMAT,weekly_usage.csv,43.0,INIT-025,initiative_id,init_25,INIT-025,Normalised initiative ID,"['adoption', 'wau_change']","Feeds adoption 22.8%, wau change -23.9%"
+NEGATIVE_VALUE,weekly_usage.csv,45.0,INIT-011,value,-1788,1788,Negative user count treated as a sign typo,"['adoption', 'wau_change']","Feeds adoption 59.0%, wau change +13.6%"
+METRIC_ALIAS,weekly_usage.csv,47.0,INIT-014,metric_name,WAU,weekly_active_users,Metric alias mapped,"['adoption', 'wau_change']","Feeds adoption 42.3%, wau change -10.5%"
+WAU_ABOVE_LICENSED,weekly_usage.csv,48.0,INIT-011,value,6880,,Active users exceed 3440 licensed users; row excluded,[],No metric affected
+NUMBER_TEXT,weekly_usage.csv,53.0,INIT-033,value,"1,058",1058,Number stored as text,"['adoption', 'wau_change']","Feeds adoption 52.6%, wau change +6.9%"
+WAU_ABOVE_LICENSED,weekly_usage.csv,54.0,INIT-033,value,4020,,Active users exceed 2010 licensed users; row excluded,[],No metric affected
+WAU_ABOVE_LICENSED,weekly_usage.csv,57.0,INIT-012,value,6480,,Active users exceed 2160 licensed users; row excluded,[],No metric affected
+METRIC_ALIAS,weekly_usage.csv,58.0,INIT-024,metric_name,WAU,weekly_active_users,Metric alias mapped,"['adoption', 'wau_change']","Feeds adoption 15.9%, wau change -24.7%"
+ID_FORMAT,weekly_usage.csv,59.0,INIT-013,initiative_id,init_13,INIT-013,Normalised initiative ID,"['adoption', 'wau_change']","Feeds adoption 21.9%, wau change +18.0%"
+WAU_ABOVE_LICENSED,weekly_usage.csv,60.0,INIT-008,value,380,,Active users exceed 150 licensed users; row excluded,[],No metric affected
+ID_FORMAT,weekly_usage.csv,62.0,INIT-031,initiative_id, INIT-31 ,INIT-031,Normalised initiative ID,"['adoption', 'wau_change']","Feeds adoption 14.1%, wau change +23.9%"
+WAU_ABOVE_LICENSED,weekly_usage.csv,74.0,INIT-030,value,11280,,Active users exceed 3760 licensed users; row excluded,[],No metric affected
+DATE_FORMAT,weekly_usage.csv,75.0,INIT-001,week_start,Nov 2 2026,2026-11-02,Parsed non-ISO date,[],No metric affected
+NEGATIVE_VALUE,weekly_usage.csv,79.0,INIT-004,value,-130,130,Negative user count treated as a sign typo,"['adoption', 'wau_change']","Feeds adoption 22.0%, wau change -15.4%"
+NUMBER_TEXT,weekly_usage.csv,83.0,INIT-026,value,"1,204",1204,Number stored as text,"['adoption', 'wau_change']","Feeds adoption 43.2%, wau change +17.2%"
+WAU_ABOVE_LICENSED,weekly_usage.csv,84.0,INIT-038,value,7560,,Active users exceed 1890 licensed users; row excluded,[],No metric affected
+WAU_ABOVE_LICENSED,weekly_usage.csv,89.0,INIT-034,value,4920,,Active users exceed 1230 licensed users; row excluded,[],No metric affected
+NEGATIVE_VALUE,weekly_usage.csv,90.0,INIT-009,value,-189,189,Negative user count treated as a sign typo,"['adoption', 'wau_change']","Feeds adoption 12.4%, wau change -9.0%"
+ID_FORMAT,weekly_usage.csv,91.0,INIT-020,initiative_id,init_20,INIT-020,Normalised initiative ID,"['adoption', 'wau_change']","Feeds adoption 87.2%, wau change -6.1%"
+ID_FORMAT,weekly_usage.csv,93.0,INIT-023,initiative_id,init_23,INIT-023,Normalised initiative ID,"['adoption', 'wau_change']","Feeds adoption 65.5%, wau change +25.1%"
+ID_FORMAT,weekly_usage.csv,97.0,INIT-003,initiative_id,init_3,INIT-003,Normalised initiative ID,"['adoption', 'wau_change']","Feeds adoption 45.0%, wau change +20.0%"
+METRIC_ALIAS,weekly_usage.csv,97.0,INIT-003,metric_name,Active Users (weekly),weekly_active_users,Metric alias mapped,"['adoption', 'wau_change']","Feeds adoption 45.0%, wau change +20.0%"
+WAU_ABOVE_LICENSED,weekly_usage.csv,101.0,INIT-016,value,15400,,Active users exceed 3080 licensed users; row excluded,[],No metric affected
+ID_FORMAT,weekly_usage.csv,107.0,INIT-003,initiative_id, INIT-3 ,INIT-003,Normalised initiative ID,"['adoption', 'wau_change']","Feeds adoption 45.0%, wau change +20.0%"
+NUMBER_TEXT,weekly_usage.csv,108.0,INIT-032,value,"1,272",1272,Number stored as text,"['adoption', 'wau_change']","Feeds adoption 36.1%, wau change -0.4%"
+ID_FORMAT,weekly_usage.csv,118.0,INIT-030,initiative_id,init_30,INIT-030,Normalised initiative ID,"['adoption', 'wau_change']","Feeds adoption 57.6%, wau change +28.0%"
+MISSING_WEEK,weekly_usage.csv,,INIT-007,week_start,,2026-11-02,No usage row for this week (flagged),[],No metric affected
+MISSING_WEEK,weekly_usage.csv,,INIT-013,week_start,,2026-11-02,No usage row for this week (flagged),[],No metric affected
+MISSING_WEEK,weekly_usage.csv,,INIT-017,week_start,,2026-11-02,No usage row for this week (flagged),[],No metric affected
+MISSING_WEEK,weekly_usage.csv,,INIT-029,week_start,,2026-11-02,No usage row for this week (flagged),[],No metric affected
+MEASURE_ALIAS,financials.xlsx,3.0,INIT-020,measure,total_cost,cost_to_date,Measure alias mapped,['roi'],Feeds roi +83.6%
+UNIT_SCALE,financials.xlsx,9.0,INIT-032,value,0 USD '000,0 USD,Converted USD '000 to USD,"['roi', 'avg_monthly_benefit', 'payback_months', 'run_rate_vs_plan', 'status']",Without this fix ROI for INIT-032 would be -100.0% instead of -100.0% (status Red)
+ID_FORMAT,financials.xlsx,13.0,INIT-036,initiative_id, INIT-36 ,INIT-036,Normalised initiative ID,['roi'],Feeds roi -45.7%
+MEASURE_ALIAS,financials.xlsx,21.0,INIT-001,measure,Benefit to date,benefit_to_date,Measure alias mapped,['roi'],Feeds roi +66.7%
+MEASURE_ALIAS,financials.xlsx,23.0,INIT-030,measure,Cost to date,cost_to_date,Measure alias mapped,['roi'],Feeds roi -52.4%
+MEASURE_ALIAS,financials.xlsx,26.0,INIT-035,measure,Benefit to date,benefit_to_date,Measure alias mapped,['roi'],Feeds roi -27.3%
+ID_FORMAT,financials.xlsx,31.0,INIT-003,initiative_id, INIT-3 ,INIT-003,Normalised initiative ID,['roi'],Feeds roi +30.0%
+MEASURE_ALIAS,financials.xlsx,31.0,INIT-003,measure,realised_benefit,benefit_to_date,Measure alias mapped,['roi'],Feeds roi +30.0%
+MEASURE_ALIAS,financials.xlsx,33.0,INIT-018,measure,Cost to date,cost_to_date,Measure alias mapped,['roi'],Feeds roi +131.8%
+MEASURE_ALIAS,financials.xlsx,34.0,INIT-016,measure,Cost to date,cost_to_date,Measure alias mapped,['roi'],Feeds roi +37.6%
+NUMBER_TEXT,financials.xlsx,35.0,INIT-017,value,$695.5k,695500,Number stored as text,['roi'],Feeds roi +48.0%
+NUMBER_TEXT,financials.xlsx,37.0,INIT-022,value,$526.4k,526400,Number stored as text,['roi'],Feeds roi +8.5%
+MEASURE_ALIAS,financials.xlsx,43.0,INIT-027,measure,value_delivered,benefit_to_date,Measure alias mapped,['roi'],Feeds roi +18.5%
+UNIT_SCALE,financials.xlsx,44.0,INIT-019,value,613.2 USD '000,613200 USD,Converted USD '000 to USD,"['roi', 'avg_monthly_benefit', 'payback_months', 'run_rate_vs_plan', 'status']",Without this fix ROI for INIT-019 would be -99.9% instead of +30.5% (status Red)
+NUMBER_TEXT,financials.xlsx,46.0,INIT-007,value,$97.5k,97500,Number stored as text,['roi'],Feeds roi +30.0%
+NUMBER_TEXT,financials.xlsx,47.0,INIT-031,value,$328.2k,328200,Number stored as text,['roi'],Feeds roi +39.7%
+ID_FORMAT,financials.xlsx,51.0,INIT-025,initiative_id, INIT-25 ,INIT-025,Normalised initiative ID,['roi'],Feeds roi +134.9%
+MEASURE_ALIAS,financials.xlsx,59.0,INIT-006,measure,value_delivered,benefit_to_date,Measure alias mapped,['roi'],Feeds roi +0.0%
+ID_FORMAT,financials.xlsx,65.0,INIT-020,initiative_id, INIT-20 ,INIT-020,Normalised initiative ID,['roi'],Feeds roi +83.6%
+MEASURE_ALIAS,financials.xlsx,65.0,INIT-020,measure,realised_benefit,benefit_to_date,Measure alias mapped,['roi'],Feeds roi +83.6%
+MEASURE_ALIAS,financials.xlsx,71.0,INIT-039,measure,realised_benefit,benefit_to_date,Measure alias mapped,['roi'],Feeds roi -22.0%
+MEASURE_ALIAS,financials.xlsx,73.0,INIT-030,measure,Benefit to date,benefit_to_date,Measure alias mapped,['roi'],Feeds roi -52.4%
+ID_FORMAT,financials.xlsx,84.0,INIT-029,initiative_id, INIT-29 ,INIT-029,Normalised initiative ID,['roi'],Feeds roi -100.0%
+UNIT_SCALE,financials.xlsx,84.0,INIT-029,value,0 USD '000,0 USD,Converted USD '000 to USD,"['roi', 'avg_monthly_benefit', 'payback_months', 'run_rate_vs_plan', 'status']",Without this fix ROI for INIT-029 would be -100.0% instead of -100.0% (status Red)
+ID_FORMAT,financials.xlsx,85.0,INIT-038,initiative_id, INIT-38 ,INIT-038,Normalised initiative ID,['roi'],Feeds roi +86.8%
+NUMBER_TEXT,financials.xlsx,85.0,INIT-038,value,$644.3k,644300,Number stored as text,['roi'],Feeds roi +86.8%
+MEASURE_ALIAS,financials.xlsx,86.0,INIT-006,measure,spend,cost_to_date,Measure alias mapped,['roi'],Feeds roi +0.0%
+MEASURE_ALIAS,financials.xlsx,95.0,INIT-004,measure,total_cost,cost_to_date,Measure alias mapped,['roi'],Feeds roi +55.6%
+UNIT_SCALE,financials.xlsx,99.0,INIT-014,value,120.1 USD '000,120100 USD,Converted USD '000 to USD,"['roi', 'avg_monthly_benefit', 'payback_months', 'run_rate_vs_plan', 'status']",Without this fix ROI for INIT-014 would be -99.9% instead of -38.4% (status Red)
+UNIT_SCALE,financials.xlsx,111.0,INIT-033,value,186.8 USD '000,186800 USD,Converted USD '000 to USD,"['roi', 'avg_monthly_benefit', 'payback_months', 'run_rate_vs_plan', 'status']",Without this fix ROI for INIT-033 would be -99.9% instead of -23.8% (status Red)
+MEASURE_ALIAS,financials.xlsx,113.0,INIT-018,measure,realised_benefit,benefit_to_date,Measure alias mapped,['roi'],Feeds roi +131.8%
+ID_FORMAT,financials.xlsx,114.0,INIT-003,initiative_id, INIT-3 ,INIT-003,Normalised initiative ID,['roi'],Feeds roi +30.0%
+ID_FORMAT,financials.xlsx,119.0,INIT-023,initiative_id, INIT-23 ,INIT-023,Normalised initiative ID,['roi'],Feeds roi +136.5%
+NUMBER_TEXT,financials.xlsx,119.0,INIT-023,value,$141.9k,141900,Number stored as text,['roi'],Feeds roi +136.5%
+ID_FORMAT,financials.xlsx,122.0,INIT-034,initiative_id, INIT-34 ,INIT-034,Normalised initiative ID,['roi'],Feeds roi +31.0%
+ID_FORMAT,financials.xlsx,135.0,INIT-024,initiative_id, INIT-24 ,INIT-024,Normalised initiative ID,['roi'],Feeds roi +5.8%
+ID_FORMAT,financials.xlsx,137.0,INIT-028,initiative_id, INIT-28 ,INIT-028,Normalised initiative ID,['roi'],Feeds roi +8.7%
+MEASURE_ALIAS,financials.xlsx,139.0,INIT-012,measure,realised_benefit,benefit_to_date,Measure alias mapped,['roi'],Feeds roi -40.4%
+NUMBER_TEXT,financials.xlsx,141.0,INIT-011,value,$130.1k,130100,Number stored as text,['roi'],Feeds roi +18.3%
+NUMBER_TEXT,financials.xlsx,144.0,INIT-013,value,$597.5k,597500,Number stored as text,['roi'],Feeds roi +125.5%
+MEASURE_ALIAS,financials.xlsx,148.0,INIT-040,measure,total_cost,cost_to_date,Measure alias mapped,['roi'],Feeds roi -43.4%
+MEASURE_ALIAS,financials.xlsx,151.0,INIT-001,measure,Cost to date,cost_to_date,Measure alias mapped,['roi'],Feeds roi +66.7%
+UNIT_SCALE,financials.xlsx,156.0,INIT-005,value,390 USD '000,390000 USD,Converted USD '000 to USD,"['roi', 'avg_monthly_benefit', 'payback_months', 'run_rate_vs_plan', 'status']",Without this fix ROI for INIT-005 would be -99.9% instead of -25.0% (status Red)
+MEASURE_ALIAS,financials.xlsx,158.0,INIT-026,measure,value_delivered,benefit_to_date,Measure alias mapped,['roi'],Feeds roi -24.0%
+NUMBER_TEXT,financials.xlsx,158.0,INIT-026,value,$231.8k,231800,Number stored as text,['roi'],Feeds roi -24.0%
+ID_FORMAT,financials.xlsx,171.0,INIT-040,initiative_id, INIT-40 ,INIT-040,Normalised initiative ID,['roi'],Feeds roi -43.4%
+MEASURE_ALIAS,financials.xlsx,171.0,INIT-040,measure,realised_benefit,benefit_to_date,Measure alias mapped,['roi'],Feeds roi -43.4%
+ID_FORMAT,financials.xlsx,180.0,INIT-021,initiative_id, INIT-21 ,INIT-021,Normalised initiative ID,['roi'],Feeds roi +59.2%
+NUMBER_TEXT,financials.xlsx,180.0,INIT-021,value,$652.7k,652700,Number stored as text,['roi'],Feeds roi +59.2%
+MEASURE_ALIAS,financials.xlsx,183.0,INIT-026,measure,Cost to date,cost_to_date,Measure alias mapped,['roi'],Feeds roi -24.0%
+MEASURE_ALIAS,financials.xlsx,188.0,INIT-016,measure,value_delivered,benefit_to_date,Measure alias mapped,['roi'],Feeds roi +37.6%
+UNIT_SCALE,financials.xlsx,188.0,INIT-016,value,736.4 USD '000,736400 USD,Converted USD '000 to USD,"['roi', 'avg_monthly_benefit', 'payback_months', 'run_rate_vs_plan', 'status']",Without this fix ROI for INIT-016 would be -99.9% instead of +37.6% (status Amber)
+MONTHLY_ROLLUP,financials.xlsx,,INIT-002,monthly_cost,11 monthly rows,220000,Summed monthly cost rows up to the as-of date into cost_to_date,"['roi', 'payback_months']","Feeds roi +86.4%, payback months 5.9 months"
+MONTHLY_ROLLUP,financials.xlsx,,INIT-009,monthly_cost,6 monthly rows,260000,Summed monthly cost rows up to the as-of date into cost_to_date,"['roi', 'payback_months']","Feeds roi +79.9%, payback months 4.5 months"
+MONTHLY_ROLLUP,financials.xlsx,,INIT-010,monthly_cost,11 monthly rows,560000,Summed monthly cost rows up to the as-of date into cost_to_date,"['roi', 'payback_months']","Feeds roi +61.7%, payback months 12.1 months"
+MONTHLY_ROLLUP,financials.xlsx,,INIT-011,monthly_cost,6 monthly rows,110000,Summed monthly cost rows up to the as-of date into cost_to_date,"['roi', 'payback_months']","Feeds roi +18.3%, payback months 9.8 months"
+MONTHLY_ROLLUP,financials.xlsx,,INIT-012,monthly_cost,10 monthly rows,495000,Summed monthly cost rows up to the as-of date into cost_to_date,"['roi', 'payback_months']","Feeds roi -40.4%, payback months 12.6 months"
+MONTHLY_ROLLUP,financials.xlsx,,INIT-015,monthly_cost,10 monthly rows,320000,Summed monthly cost rows up to the as-of date into cost_to_date,"['roi', 'payback_months']","Feeds roi +114.5%, payback months 2.1 months"
+MONTHLY_ROLLUP,financials.xlsx,,INIT-027,monthly_cost,10 monthly rows,335000,Summed monthly cost rows up to the as-of date into cost_to_date,"['roi', 'payback_months']","Feeds roi +18.5%, payback months 9.2 months"
+MONTHLY_ROLLUP,financials.xlsx,,INIT-034,monthly_cost,4 monthly rows,565000,Summed monthly cost rows up to the as-of date into cost_to_date,"['roi', 'payback_months']","Feeds roi +31.0%, payback months 13.6 months"
+MONTHLY_ROLLUP,financials.xlsx,,INIT-035,monthly_cost,9 monthly rows,425000,Summed monthly cost rows up to the as-of date into cost_to_date,"['roi', 'payback_months']","Feeds roi -27.3%, payback months 20.2 months"
+MONTHLY_ROLLUP,financials.xlsx,,INIT-036,monthly_cost,4 monthly rows,435000,Summed monthly cost rows up to the as-of date into cost_to_date,"['roi', 'payback_months']","Feeds roi -45.7%, payback months 16.6 months"
+MONTHLY_ROLLUP,financials.xlsx,,INIT-039,monthly_cost,8 monthly rows,490000,Summed monthly cost rows up to the as-of date into cost_to_date,"['roi', 'payback_months']","Feeds roi -22.0%, payback months 15.0 months"
+REPORTED_ROI_MISMATCH,financials.xlsx,2.0,INIT-002,value,186.4%,86.4%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 186.4% ignored; governed ROI is 86.4%
+REPORTED_ROI_MISMATCH,financials.xlsx,4.0,INIT-032,value,0%,-100.0%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 0% ignored; governed ROI is -100.0%
+REPORTED_ROI_MISMATCH,financials.xlsx,7.0,INIT-025,value,234.9%,134.9%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 234.9% ignored; governed ROI is 134.9%
+REPORTED_ROI_MISMATCH,financials.xlsx,8.0,INIT-022,value,108.5%,8.5%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 108.5% ignored; governed ROI is 8.5%
+REPORTED_ROI_MISMATCH,financials.xlsx,28.0,INIT-033,value,76.2%,-23.8%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 76.2% ignored; governed ROI is -23.8%
+REPORTED_ROI_MISMATCH,financials.xlsx,42.0,INIT-015,value,214.5%,114.5%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 214.5% ignored; governed ROI is 114.5%
+REPORTED_ROI_MISMATCH,financials.xlsx,52.0,INIT-014,value,61.6%,-38.4%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 61.6% ignored; governed ROI is -38.4%
+REPORTED_ROI_MISMATCH,financials.xlsx,53.0,INIT-027,value,118.5%,18.5%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 118.5% ignored; governed ROI is 18.5%
+REPORTED_ROI_MISMATCH,financials.xlsx,54.0,INIT-024,value,105.8%,5.8%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 105.8% ignored; governed ROI is 5.8%
+REPORTED_ROI_MISMATCH,financials.xlsx,55.0,INIT-040,value,56.6%,-43.4%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 56.6% ignored; governed ROI is -43.4%
+REPORTED_ROI_MISMATCH,financials.xlsx,61.0,INIT-006,value,100%,0.0%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 100% ignored; governed ROI is 0.0%
+REPORTED_ROI_MISMATCH,financials.xlsx,64.0,INIT-029,value,0%,-100.0%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 0% ignored; governed ROI is -100.0%
+REPORTED_ROI_MISMATCH,financials.xlsx,70.0,INIT-009,value,179.9%,79.9%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 179.9% ignored; governed ROI is 79.9%
+REPORTED_ROI_MISMATCH,financials.xlsx,82.0,INIT-001,value,166.7%,66.7%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 166.7% ignored; governed ROI is 66.7%
+REPORTED_ROI_MISMATCH,financials.xlsx,83.0,INIT-038,value,186.8%,86.8%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 186.8% ignored; governed ROI is 86.8%
+REPORTED_ROI_MISMATCH,financials.xlsx,89.0,INIT-017,value,148%,48.0%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 148% ignored; governed ROI is 48.0%
+REPORTED_ROI_MISMATCH,financials.xlsx,98.0,INIT-012,value,59.6%,-40.4%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 59.6% ignored; governed ROI is -40.4%
+REPORTED_ROI_MISMATCH,financials.xlsx,102.0,INIT-018,value,231.8%,131.8%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 231.8% ignored; governed ROI is 131.8%
+REPORTED_ROI_MISMATCH,financials.xlsx,105.0,INIT-016,value,137.6%,37.6%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 137.6% ignored; governed ROI is 37.6%
+REPORTED_ROI_MISMATCH,financials.xlsx,109.0,INIT-020,value,183.6%,83.6%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 183.6% ignored; governed ROI is 83.6%
+REPORTED_ROI_MISMATCH,financials.xlsx,112.0,INIT-039,value,78%,-22.0%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 78% ignored; governed ROI is -22.0%
+REPORTED_ROI_MISMATCH,financials.xlsx,121.0,INIT-028,value,108.7%,8.7%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 108.7% ignored; governed ROI is 8.7%
+REPORTED_ROI_MISMATCH,financials.xlsx,123.0,INIT-030,value,47.6%,-52.4%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 47.6% ignored; governed ROI is -52.4%
+REPORTED_ROI_MISMATCH,financials.xlsx,126.0,INIT-007,value,130%,30.0%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 130% ignored; governed ROI is 30.0%
+REPORTED_ROI_MISMATCH,financials.xlsx,127.0,INIT-005,value,75%,-25.0%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 75% ignored; governed ROI is -25.0%
+REPORTED_ROI_MISMATCH,financials.xlsx,128.0,INIT-013,value,225.5%,125.5%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 225.5% ignored; governed ROI is 125.5%
+REPORTED_ROI_MISMATCH,financials.xlsx,129.0,INIT-021,value,159.2%,59.2%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 159.2% ignored; governed ROI is 59.2%
+REPORTED_ROI_MISMATCH,financials.xlsx,133.0,INIT-035,value,72.7%,-27.3%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 72.7% ignored; governed ROI is -27.3%
+REPORTED_ROI_MISMATCH,financials.xlsx,146.0,INIT-010,value,161.7%,61.7%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 161.7% ignored; governed ROI is 61.7%
+REPORTED_ROI_MISMATCH,financials.xlsx,152.0,INIT-031,value,139.7%,39.7%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 139.7% ignored; governed ROI is 39.7%
+REPORTED_ROI_MISMATCH,financials.xlsx,155.0,INIT-008,value,0%,-100.0%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 0% ignored; governed ROI is -100.0%
+REPORTED_ROI_MISMATCH,financials.xlsx,163.0,INIT-011,value,118.3%,18.3%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 118.3% ignored; governed ROI is 18.3%
+REPORTED_ROI_MISMATCH,financials.xlsx,168.0,INIT-023,value,236.5%,136.5%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 236.5% ignored; governed ROI is 136.5%
+REPORTED_ROI_MISMATCH,financials.xlsx,174.0,INIT-037,value,0%,-100.0%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 0% ignored; governed ROI is -100.0%
+REPORTED_ROI_MISMATCH,financials.xlsx,175.0,INIT-036,value,54.3%,-45.7%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 54.3% ignored; governed ROI is -45.7%
+REPORTED_ROI_MISMATCH,financials.xlsx,184.0,INIT-003,value,130%,30.0%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 130% ignored; governed ROI is 30.0%
+REPORTED_ROI_MISMATCH,financials.xlsx,185.0,INIT-019,value,130.5%,30.5%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 130.5% ignored; governed ROI is 30.5%
+REPORTED_ROI_MISMATCH,financials.xlsx,191.0,INIT-004,value,155.6%,55.6%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 155.6% ignored; governed ROI is 55.6%
+REPORTED_ROI_MISMATCH,financials.xlsx,194.0,INIT-026,value,76%,-24.0%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 76% ignored; governed ROI is -24.0%
+REPORTED_ROI_MISMATCH,financials.xlsx,198.0,INIT-034,value,131%,31.0%,Supplied ROI uses a different convention; scorecard uses (benefit - cost) / cost,[],Supplied ROI 131% ignored; governed ROI is 31.0%

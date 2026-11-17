@@ -29,3 +29,8 @@ streamlit==1.67.0           # (verified)
 
 # --- Tests ---------------------------------------------------------------
 pytest==9.2.0               # (verified)
+
+# --- Nimbus web app (nimbus/ + frontend/) ---------------------------------
+pypdf>=5.0                  # PDF charter parsing in nimbus/charters.py
+altair>=5                   # charts in the optional Streamlit dashboard
+python-dotenv>=1.0          # loads .env settings
