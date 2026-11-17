@@ -173,7 +173,7 @@ fix was already included in the Step 3 commit, but the data was NOT regenerated,
   Amber with status reason and cited top charter risk; INIT-003 shows the fallback). Dashboard Generate + download.
 - **M4:** `eval/questions.yaml` (12), `eval/run_eval.py` -> `eval/results.md` (12/12 pass; scorecard 56/56 and
   280/280 cells), `docs/assumptions.md`, `README.md`.
-- Tests: 148 passing, all offline. Real uvicorn + streamlit startup verified.
+- Tests: 147 passing, all offline. Real uvicorn + streamlit startup verified.
 
 ### Decisions (sprint, developer-specified)
 - `AskResponse` (route, status, answer, scorecard_sources, charter_sources, guard_notes, data_version) added in
